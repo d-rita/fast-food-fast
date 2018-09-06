@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <a href="home.html">Fast-Food-Fast</a></h1>
+        </div>
+        <!--endof header-->
+        <div class="nav">
+            <ul>
+                <li><a href="home.html">Menu</a></li>
+                <li><a href="history.html">Order History</a></li>
+            </ul>
+        </div>
+        <!--endof nav-->
+        <div class="main">
+            <div class="menu">
+                <table>
+                    <tr>
+                        <td>Chicken Burger</td>
+                        <td>12,000</td>
+                        <td><button id="order-btn">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>Chicken Burger</td>
+                        <td>12,000</td>
+                        <td><button id="order-btn">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>Beef Burger</td>
+                        <td>12,000</td>
+                        <td><button id="order-btn">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>Veggie Burger</td>
+                        <td>12,000</td>
+                        <td><button id="order-btn">Add</button></td>
+                    </tr>
+                    <tr>
+                        <td>Ham Burger</td>
+                        <td>12,000</td>
+                        <td><button id="order-btn">Add</button></td>
+                    </tr>
+                </table>
+            </div>
+            <!--endof menu-->
+            <div class="checkout">
+                <table>
+                    <tr>
+                        <th colspan="2">My orders</th>
+                    </tr>
+                    <tr>
+                        <td>Veggie burger</td>
+                        <td>12,000</td>
+                    </tr>
+                    <tr>
+                        <td><b>Total Cost</b></td>
+                        <td><b>12,000</b></td>
+                    </tr>
+                </table>
+                <form id="payform">
+                    <input type="text" placeholder="Specify area of location">
+                    <p>Payment mode</p>
+                    <input type="radio" name="payment" value="Cash" checked>Cash on delivery
+                    <input type="radio" name="payment" value="Cashless">Card/Mobile Money
+                    <br><br>
+                    <input type="submit" value="Place my order">
+
+                </form>
+            </div>
+            <!--endof checkout-->
+
+
+        </div>
+        <!--endof main-->
+    </div>
+    <!--endof container-->
+
+</body>
+<footer>©Copyright of Fast-Food-Fast 2018. All rights reserved.</footer>
+
+</html>
