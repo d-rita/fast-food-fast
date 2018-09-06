@@ -10,3 +10,5 @@ HTML Features
    - Accept and decline orders
    - Mark orders as completed
 - A user should be able to see a history of ordered food
+
+This project is hosted on github pages on https://d-rita.github.io/fast-food-fast
