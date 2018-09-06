@@ -9,7 +9,7 @@ HTML Features
 - The Admin user should be able to do the following:
    - See a list of orders 
    - Accept and decline orders
-   - Mark orders as completed at on https://d-rita.github.io/fast-food-fast/UI/admin_login.html
+   - Mark orders as completed at on https://d-rita.github.io/fast-food-fast/UI/admin_home.html
 - A user should be able to see a history of ordered food at https://d-rita.github.io/fast-food-fast/UI/history.html
 
 
