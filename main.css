@@ -1,6 +1,7 @@
 * {
     font-family: Georgia, serif;
     font-size: 100%;
+    text-decoration: none;
 }
 
 .header {
@@ -11,6 +12,10 @@
 
 h1 {
     font-size: 2.25em;
+}
+
+h1 a {
+    color: black;
 }
 
 .main {
@@ -68,5 +73,100 @@ legend {
 
 .admin_login,
 {
+    margin: 0 auto;
+}
+
+
+/*home.html*/
+
+.menu {
+    margin: 0 auto;
+}
+
+td {
+    padding: 20px;
+    border-bottom: solid #ffc266 2px;
+}
+
+.nav {
+    padding: 5px;
+}
+
+.nav ul {
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+    height: 25px;
+    padding: 20px 20px;
+}
+
+.nav ul li {
+    display: inline;
+    list-style: none;
+}
+
+.nav ul li a {
+    padding: 5px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.25em;
+    padding: 20px;
+}
+
+.nav ul li a:hover {
+    background-color: #ffc266;
+}
+
+.checkout {
+    width: 400px;
+    margin-right: 50px;
+}
+
+#order-btn {
+    background-color: #ffc266;
+    font-weight: bold;
+    border-radius: 12px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+
+/*history.html*/
+
+.history {
+    margin: 0 auto;
+}
+
+
+/*admin pages*/
+
+.order-list {
+    margin: 0 auto;
+}
+
+.food {
+    width: 400px;
+    padding: 40px;
+}
+
+.orders {
+    margin-left: 250px;
+}
+
+input[type=button] {
+    background-color: #ffc266;
+    font-weight: bold;
+    border-radius: 12px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.edit {
     margin: 0 auto;
 }
