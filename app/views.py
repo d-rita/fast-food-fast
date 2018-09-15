@@ -28,7 +28,7 @@ def get_all_orders():
 
 #FETCH A PARTICULAR ORDER
 @app.route('/orders/<int:orderId>', methods=['GET'])
-def get_order(orderId):
+def get_an_order(orderId):
         food_order=[order for order in orders if order['orderId']==orderId]
         return jsonify({'order': food_order[0]})
 
