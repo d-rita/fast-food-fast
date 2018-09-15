@@ -32,6 +32,19 @@ def get_an_order(orderId):
         food_order=[order for order in orders if order['orderId']==orderId]
         return jsonify({'order': food_order[0]})
 
+#CREATE A NEW ORDER
+@app.route('/orders', methods=['POST'])
+def add_order():
+    order={
+        'name': request.json['name'], 
+        'price': request.json['price'],
+        'location': request.json['location'],
+        'payment':'cash on delivery',
+        'date': request.json['date']
+    }
+    orders.append(order)
+    return jsonify({'orders': orders})
+
 
 if __name__=='__main__':
     app.run(debug=True)
