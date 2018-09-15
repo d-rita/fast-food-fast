@@ -44,6 +44,16 @@ def add_order():
     }
     orders.append(order)
     return jsonify({'orders': orders})
+    
+#Update status of order
+@app.route('/orders/<int:orderId>', methods=['PUT'])
+def update_order_status(orderId):
+    food_order=[order for order in orders if order['orderId']==orderId]
+    food_order[0]['name']=request.json['name']
+    food_order[0]['price']=request.json['price']
+    
+    return jsonify({'order': food_order[0]})
+
 
 
 if __name__=='__main__':
