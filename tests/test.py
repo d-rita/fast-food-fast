@@ -26,6 +26,10 @@ class BaseTestCase(unittest.TestCase):
             ),
             content_type='application/json'
         )
+    
+    def get_orders(self):
+        return self.client.get('api/v1/orders')
+
 
 class TestOrdersApi(BaseTestCase):
    
@@ -43,6 +47,12 @@ class TestOrdersApi(BaseTestCase):
             print(data)
             print(response)
             self.assertEqual(data.get('message'), "Order added successfully")
+
+    def test_get_all_orders(self):
+        with self.client:
+            response=self.get_orders()
+            self.assertEqual(response.status_code, 200)
+
 
 
 
