@@ -8,6 +8,9 @@ UI/
 _cache/*
 venv/
 .vscode/
-__pycache__/
+/__pycache__/
 */.pytest_cache/*
 .pytest_cache/
+__pycache__/
+.pyc
+\pycache__\__init__.cpython-36.pyc

@@ -1,13 +1,13 @@
 from flask import Flask, jsonify, request, json, make_response
 from app import app
 from app.models.orders import orders
-from flask import make_response
+
 
 
 #GET ALL ORDERS
 @app.route('/api/v1/orders', methods=['GET'])
 def get_all_orders():
-    return jsonify({'orders': orders})
+    return make_response(jsonify({'orders': orders}), 200)
 
 #FETCH A PARTICULAR ORDER
 @app.route('/api/v1/orders/<int:orderId>', methods=['GET'])
