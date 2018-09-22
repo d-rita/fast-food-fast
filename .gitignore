@@ -1,0 +1,13 @@
+*/_pycache_/*
+_pycache
+venv
+.vscode
+.idea
+virtualenv
+UI/
+_cache/*
+venv/
+.vscode/
+__pycache__/
+*/.pytest_cache/*
+.pytest_cache/
