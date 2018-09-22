@@ -1,11 +1,15 @@
+from app.models import food
+orders = []
 class Orders(object):
-    def __init__(self, orderId, name, price, location, payment, date):
-        self.orderId=orderId
+    def __init__(self, location,name, price, payment, date):
+       # self.orderId=orderId
+        self.location=location
         self.name=name
         self.price=price
-        self.location=location
         self.payment=payment
+        #self.quantity=quantity
         self.date=date
+        #self.food={}
 
     def add_order(self):
         pass
