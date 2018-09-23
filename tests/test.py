@@ -4,8 +4,7 @@ import json
 from app.views import views
 
 #from app.models import food
-from app.models.orders import orders
-
+from app.models.orders import orders, Orders
 
 class BaseTestCase(unittest.TestCase):
     def setUp(self):
@@ -14,7 +13,7 @@ class BaseTestCase(unittest.TestCase):
     def tearDown(self):
        orders[:]=[]
 
-    def post_order(self, orderId, location, payment,name, price, date):
+    def post_order(self, orderId, location, payment,name, price,quantity, date):
             return self.client.post('/api/v1/orders',
             data=json.dumps(dict( 
                 orderId=orderId,
@@ -22,6 +21,7 @@ class BaseTestCase(unittest.TestCase):
                 payment=payment, 
                 name=name,
                 price=price,
+                quantity=quantity,
                 date=date
             )
             ),
@@ -36,29 +36,54 @@ class BaseTestCase(unittest.TestCase):
 
 
 class TestOrdersApi(BaseTestCase):
+
+    def test_can_get_all_orders_list(self):
+        with self.client:
+            self.post_order(1,'Bunga', 'cash','burger','22000',1, '12/02/2018')
+            response=self.get_orders()
+            self.assertEqual(response.status_code, 200)
+
+    def test_get_nonexisting_orders_list(self):
+        with self.client:
+            response=self.get_orders()
+            self.assertEqual(response.status_code, 404)
+
+    def test_get_nonexisting_orders_list_message(self):
+        with self.client:
+            response=self.get_orders()
+            data=json.loads(response.data.decode())
+            self.assertEqual(data.get('message'), 'No orders')
+
+    def test_get_existng_order(self):
+        with self.client:
+            self.post_order(1,'Bunga', 'cash','burger','22000',1, '12/02/2018')
+            response=self.get_an_order()
+            self.assertEqual(response.status_code, 200)
+
+    def test_get_non_existing_order(self):
+        with self.client:
+            response=self.get_an_order()
+            self.assertEqual(response.status_code, 404)
+
+    def test_get_non_existing_order_message(self):
+        with self.client:
+            response=self.get_an_order()
+            data=json.loads(response.data.decode())
+            self.assertEqual(data.get('message'), 'Order not found')
    
     def test_can_add_order(self):
         with self.client:
-            response=self.post_order(1,'Bunga', 'cash','burger','22000', '12/02/2018')
+            response=self.post_order(1,'Bunga', 'cash','burger','22000',1, '12/02/2018')
             self.assertEqual(response.status_code, 201)
         
     def test_add_order_message(self):
         with self.client:
-            
-            response=self.post_order(1,'Bunga', 'cash','burger','22000', '12/02/2018')
+            response=self.post_order(1,'Bunga', 'cash','burger','22000',1, '12/02/2018')
             data=json.loads(response.data.decode())
             print(data)
             print(response)
             self.assertEqual(data.get('message'), "Order sent successfully")
 
-    def test_can_get_all_orders(self):
-        with self.client:
-            self.post_order(1,'Bunga', 'cash','burger','22000', '12/02/2018')
-            response=self.get_orders()
-            self.assertEqual(response.status_code, 200)
-
-    def test_get_nonexistng_order(self):
-        with self.client:
-            self.post_order(1,'Bunga', 'cash','burger','22000', '12/02/2018')
-            response=self.get_an_order()
-            self.assertEqual(response.status_code, 200)
+    def test_order_class(self):
+        order1=Orders(1,'Bunga', 'cash','burger','22000',1, '12/02/2018')
+        self.assertTrue(order1)
