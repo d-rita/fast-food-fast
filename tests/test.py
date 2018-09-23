@@ -59,6 +59,6 @@ class TestOrdersApi(BaseTestCase):
 
     def test_get_nonexistng_order(self):
         with self.client:
-            self.post_order(2,'Bunga', 'cash','burger','22000', '12/02/2018')
+            self.post_order(1,'Bunga', 'cash','burger','22000', '12/02/2018')
             response=self.get_an_order()
             self.assertEqual(response.status_code, 200)
