@@ -8,10 +8,5 @@ class User(object):
         self.password=password
         self.user_state=user_state
 
-    def sign_up(self):
-        pass
-
-    def log_in(self):
-        pass
-
+    
     
