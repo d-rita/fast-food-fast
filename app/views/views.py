@@ -29,6 +29,7 @@ def add_order():
     payment='cash on delivery'
     quantity=request.json['quantity']
     date= request.json['date']
+    status=request.json['status']
     order = {
         'orderId':generate_orderId(orders),
         'location':location,
@@ -36,13 +37,20 @@ def add_order():
         'price':price,
         'payment':payment,
         'quantity':quantity,
-        'date':date
+        'date':date, 
+        'status':status
     }
-    Orders('orderId', location= location, name = name, price =price, payment = payment, quantity=quantity, date = date )
+    Orders('orderId', location= location, name = name, price =price, payment = payment, quantity=quantity, date = date, status=status )
     orders.append(order)
     return make_response(jsonify({'message': "Order sent successfully"}), 201)
     
 #Update status of order
-@app.route('/orders/<int:orderId>', methods=['PUT'])
+@app.route('/api/v1/orders/<int:orderId>', methods=['PUT'])
 def update_order_status(orderId):
-    pass
+    updated_order=[]
+    for order in orders:
+        if order['orderId']==orderId:
+            order['status']=request.json['status']
+            updated_order.append(order)
+            return make_response(jsonify({'message':'Order status updated'}), 200)
+    return make_response(jsonify({'message':'Order does not exist'}), 404)
