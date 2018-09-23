@@ -18,7 +18,7 @@ def get_an_order(orderId):
     for order in orders:
         if order['orderId'] == orderId:
             return make_response(jsonify(order), 200)
-    return make_response(jsonify({'message': 'Order not found'}), 400)
+    return make_response(jsonify({'message': 'Order not found'}), 404)
 
 #CREATE A NEW ORDER
 @app.route('/api/v1/orders', methods=['POST'])
@@ -27,6 +27,7 @@ def add_order():
     price= request.json['price']
     location= request.json['location']
     payment='cash on delivery'
+    quantity=request.json['quantity']
     date= request.json['date']
     order = {
         'orderId':generate_orderId(orders),
@@ -34,9 +35,10 @@ def add_order():
         'name':name,
         'price':price,
         'payment':payment,
+        'quantity':quantity,
         'date':date
     }
-    Orders('orderId', location= location, name = name, price =price, payment = payment, date = date )
+    Orders('orderId', location= location, name = name, price =price, payment = payment, quantity=quantity, date = date )
     orders.append(order)
     return make_response(jsonify({'message': "Order sent successfully"}), 201)
     
