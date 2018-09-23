@@ -1,18 +1,18 @@
-#from app.models import food
-#from random import randint
 orders = [] 
 
-id = 0 
-def generate_orderId(orders): # pragma: no cover
-    global id
+Id = 0 
+def generate_orderId(orders):# pragma: no cover
+    """Function to generate orderId""" 
+    global Id
     if len(orders)==0:
-        id = len(orders)+1
+        Id = len(orders)+1
     else:
-        id = id+1
-    return id 
+        Id = Id+1
+    return Id 
 
 class Orders(object):
-    def __init__(self, orderId,location,name, price, payment,quantity, date):
+    """Orders module to define an instance of an order"""
+    def __init__(self, orderId,location,name, price, payment,quantity, date, status):
         self.orderId=orderId
         self.location=location
         self.name=name
@@ -20,6 +20,4 @@ class Orders(object):
         self.payment=payment
         self.quantity=quantity
         self.date=date
-        #self.accepted = False
-        #self.rejected = False
-        #self.completed = False
+        self.status=status
