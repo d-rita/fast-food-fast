@@ -1,5 +1,5 @@
-from app.models import food
-from random import randint
+#from app.models import food
+#from random import randint
 orders = []
 
 id = 0
@@ -12,15 +12,14 @@ def generate_orderId(orders):
     return id
 
 class Orders(object):
-    def __init__(self, orderId,location,name, price, payment, date):
+    def __init__(self, orderId,location,name, price, payment,quantity, date):
         self.orderId=orderId
         self.location=location
         self.name=name
         self.price=price
         self.payment=payment
+        self.quantity=quantity
         self.date=date
         self.accepted = False
-        self.approved = False
         self.rejected = False
-
-
+        self.completed = False
