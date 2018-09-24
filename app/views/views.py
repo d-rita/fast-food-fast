@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, json, make_response
+import datetime
 from app import app
 from app.models.orders import orders, Orders, generate_orderId
 
@@ -23,26 +24,19 @@ def get_an_order(orderId):
 #CREATE A NEW ORDER
 @app.route('/api/v1/orders', methods=['POST'])
 def add_order():
-    name= request.json['name']
-    price= request.json['price']
-    location= request.json['location']
-    payment='cash on delivery'
-    quantity=request.json['quantity']
-    date= request.json['date']
-    status=request.json['status']
+    input_data=request.json
     order = {
         'orderId':generate_orderId(orders),
-        'location':location,
-        'name':name,
-        'price':price,
-        'payment':payment,
-        'quantity':quantity,
-        'date':date, 
-        'status':status
+        'location':input_data['location'],
+        'name':input_data['name'],
+        'price':input_data['price'],
+        'payment':'cash on delivery',
+        'quantity':input_data['quantity'],
+        'date':datetime.datetime.now().date(), 
+        'status':'Pending'
     }
-    Orders('orderId', location= location, name = name, price =price, payment = payment, quantity=quantity, date = date, status=status )
     orders.append(order)
-    return make_response(jsonify({'message': "Order sent successfully"}), 201)
+    return make_response(jsonify({'added_order': order, 'message': "Order sent successfully"}), 201)
     
 #Update status of order
 @app.route('/api/v1/orders/<int:orderId>', methods=['PUT'])
@@ -52,5 +46,5 @@ def update_order_status(orderId):
         if order['orderId']==orderId:
             order['status']=request.json['status']
             updated_order.append(order)
-            return make_response(jsonify({'message':'Order status updated'}), 200)
+            return make_response(jsonify({'updated_order':updated_order,'message':'Order status updated'}), 200)
     return make_response(jsonify({'message':'Order does not exist'}), 404)
