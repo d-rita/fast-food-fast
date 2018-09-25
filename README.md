@@ -70,13 +70,12 @@ python run.py
 ```
 pytest tests/test.py
 ```
-or 
-```
-nosetests
-```
 To get coverage report of tests, run:
 ```
-nosetests -v --with-coverage --cover-package=app
+pip install pytest-cov
+```
+```
+pytest tests/test.py --cov=app --cov-report term missing
 ```
 
 **Deployment**
