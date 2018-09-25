@@ -66,21 +66,13 @@ def add_order():
     name=order['name']
     location=order['location']
     price=order['price']
-    if not name:
-        return make_response(jsonify('Please enter name'), 400)
-    elif not isinstance(name, str):
+    if not name or not location or not price:
+        return make_response(jsonify('Field cannot be empty'), 400)
+    elif not isinstance(name, str) or not re.search(r'^[a-zA-Z]+$', name):
         return make_response(jsonify('Please enter letters only'), 400)
-    elif not re.search(r'^[a-zA-Z]+$', name):
-        return make_response(jsonify('Please enter letters only'), 400)
-    if not price:
-        return make_response(jsonify('Please enter price'), 400)
     elif not isinstance(price, int):
         return make_response(jsonify('Please enter digits only'), 400)
-    if not location:
-        return make_response(jsonify('Please enter location'), 400)
-    elif not isinstance(location, str):
-        return make_response(jsonify('Please enter letters only'), 400)
-    elif not re.search(r'^[a-zA-Z]+$', location):
+    elif not isinstance(location, str) or not re.search(r'^[a-zA-Z]+$', location):
         return make_response(jsonify('Please enter letters only'), 400)
     else:
         orders.append(order)
