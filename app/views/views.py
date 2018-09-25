@@ -1,7 +1,10 @@
-from flask import Flask, jsonify, request, json, make_response
 import datetime
+import re
+
+from flask import jsonify, make_response, request
+
 from app import app
-from app.models.orders import orders, Orders, generate_orderId
+from app.models.orders import generate_orderId, orders
 
 for_today=datetime.datetime.now().date()
 
@@ -30,14 +33,32 @@ def add_order():
         'location':input_data['location'],
         'name':input_data['name'],
         'price':input_data['price'],
-        'payment':'cash on delivery',
-        'quantity':input_data['quantity'],
         'date':for_today, 
         'status':'Pending'
     }
-    orders.append(order)
-    return make_response(jsonify({'added_order': order, 'message': "Order sent successfully"}), 201)
-    
+    name=order['name']
+    location=order['location']
+    price=order['price']
+    if not name:
+        return make_response(jsonify('Please enter name'), 400)
+    elif not isinstance(name, str):
+        return make_response(jsonify('Please enter letters only'), 400)
+    elif not re.search(r'^[a-zA-Z]+$', name):
+        return make_response(jsonify('Please enter letters only'), 400)
+    if not price:
+        return make_response(jsonify('Please enter price'), 400)
+    elif not isinstance(price, int):
+        return make_response(jsonify('Please enter digits only'), 400)
+    if not location:
+        return make_response(jsonify('Please enter location'), 400)
+    elif not isinstance(location, str):
+        return make_response(jsonify('Please enter letters only'), 400)
+    elif not re.search(r'^[a-zA-Z]+$', location):
+        return make_response(jsonify('Please enter letters only'), 400)
+    else:
+        orders.append(order)
+        return make_response(jsonify({'added_order': order, 'message': "Order sent successfully"}), 201)
+
 #Update status of order
 @app.route('/api/v1/orders/<int:orderId>', methods=['PUT'])
 def update_order_status(orderId):
