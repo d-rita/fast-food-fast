@@ -188,7 +188,7 @@ class TestOrdersApi(BaseTestCase):
 
         Returns 400(bad request)
         """
-        response=self.post_order(1, "Bunga", 78,'five' , '12/02/2018', 'Pending')
+        response=self.post_order(1, "Bunga", 'burger','five' , '12/02/2018', 'Pending')
         self.assertEqual(response.status_code, 400)
 
     def test_empty_location_string(self):
