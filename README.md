@@ -71,6 +71,7 @@ python run.py
 ```
 pytest tests/test.py
 ```
+
 To get coverage report of tests, run:
 ```
 pip install pytest-cov
