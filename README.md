@@ -1,4 +1,5 @@
 **Fast Food Fast**
+
 [![Build Status](https://travis-ci.com/d-rita/fast-food-fast.svg?branch=test-apis)](https://travis-ci.com/d-rita/fast-food-fast)
 [![Coverage Status](https://coveralls.io/repos/github/d-rita/fast-food-fast/badge.svg?branch=challenge2)](https://coveralls.io/github/d-rita/fast-food-fast?branch=challenge2)
 [![Maintainability](https://api.codeclimate.com/v1/badges/ac9de1de92af85530407/maintainability)](https://codeclimate.com/github/d-rita/fast-food-fast/maintainability)
@@ -32,7 +33,7 @@ on your local machine to set up the code for you. Then navigate to folder with
 **Installations**
 
 In your terminal:
-- Install virtualenv usung:
+- Install virtualenv using:
 ```
  pip install virtualenv
 ```
