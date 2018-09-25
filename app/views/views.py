@@ -11,6 +11,14 @@ for_today=datetime.datetime.now().date()
 #GET ALL ORDERS
 @app.route('/api/v1/orders', methods=['GET'])
 def get_all_orders():
+    """
+    This function maps to '/api/v1/orders' for GET method
+    Retrieves all orders
+
+    Returns:
+    200 if orders list exists and JSON format of all orders
+    404 if there is no orders list
+    """
     if orders:
         return make_response(jsonify({'orders': orders}), 200)
     else:
@@ -19,6 +27,17 @@ def get_all_orders():
 #FETCH A PARTICULAR ORDER
 @app.route('/api/v1/orders/<int:orderId>', methods=['GET'])
 def get_an_order(orderId):
+    """
+    This function maps to '/api/v1/orders/<int:orderId> for GET method'
+    Retrieves an order matching the orderId in url
+
+    Args:
+    int orderId
+
+    Returns:
+    200 if orderId matches existing order
+    404 if orderId finds no match
+    """
     for order in orders:
         if order['orderId'] == orderId:
             return make_response(jsonify(order), 200)
@@ -27,13 +46,21 @@ def get_an_order(orderId):
 #CREATE A NEW ORDER
 @app.route('/api/v1/orders', methods=['POST'])
 def add_order():
+    """
+    This function maps to '/api/v1/orders/ for POST method'
+    Create an order
+
+    Returns:
+    201 for successful creation of order
+    400 for a bad request: empty fields and wrong data type
+    """
     input_data=request.json
     order = {
         'orderId':generate_orderId(orders),
         'location':input_data['location'],
         'name':input_data['name'],
         'price':input_data['price'],
-        'date':for_today, 
+        'date':for_today,
         'status':'Pending'
     }
     name=order['name']
@@ -62,10 +89,21 @@ def add_order():
 #Update status of order
 @app.route('/api/v1/orders/<int:orderId>', methods=['PUT'])
 def update_order_status(orderId):
+    """
+    This function maps to '/api/v1/orders/<int:orderId>' for PUT method
+    It updates the order status of order matching the given orderId.
+
+    Args:
+    int orderId
+
+    Returns:
+    201 if update has been made
+    404 if order does not exist
+    """
     updated_order=[]
     for order in orders:
         if order['orderId']==orderId:
             order['status']='Complete'
             updated_order.append(order)
-            return make_response(jsonify({'updated_order':updated_order,'message':'Order status updated'}), 200)
+            return make_response(jsonify({'updated_order':updated_order,'message':'Order status updated'}), 201)
     return make_response(jsonify({'message':'Order does not exist'}), 404)
