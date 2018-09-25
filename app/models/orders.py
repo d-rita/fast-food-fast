@@ -1,3 +1,4 @@
+import re
 orders = [] 
 
 Id = 0 
@@ -9,6 +10,22 @@ def generate_orderId(orders):# pragma: no cover
     else:
         Id = Id+1
     return Id 
+
+def validate_order(name, price, location, payment, quantity):
+    if not name:
+        return False
+    elif not re.search(r'^[a-zA-Z\S][^0-9]+$', name):
+        return False
+    elif price=='':
+        return False
+    elif location=='':
+        return False
+    elif payment=='':
+        return False
+    elif quantity=='':
+        return False
+    else:
+        return True
 
 class Orders(object):
     """Orders module to define an instance of an order"""

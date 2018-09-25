@@ -3,7 +3,7 @@ import datetime
 from app import app
 from app.models.orders import orders, Orders, generate_orderId
 
-
+for_today=datetime.datetime.now().date()
 
 #GET ALL ORDERS
 @app.route('/api/v1/orders', methods=['GET'])
@@ -32,7 +32,7 @@ def add_order():
         'price':input_data['price'],
         'payment':'cash on delivery',
         'quantity':input_data['quantity'],
-        'date':datetime.datetime.now().date(), 
+        'date':for_today, 
         'status':'Pending'
     }
     orders.append(order)
@@ -44,7 +44,7 @@ def update_order_status(orderId):
     updated_order=[]
     for order in orders:
         if order['orderId']==orderId:
-            order['status']=request.json['status']
+            order['status']='Complete'
             updated_order.append(order)
             return make_response(jsonify({'updated_order':updated_order,'message':'Order status updated'}), 200)
     return make_response(jsonify({'message':'Order does not exist'}), 404)
