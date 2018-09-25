@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/ac9de1de92af85530407/maintainability)](https://codeclimate.com/github/d-rita/fast-food-fast/maintainability)
 
 
-Fast-food-fast is a delivery service for a restaurant. 
+Fast-Food-Fast is a delivery service for a restaurant. 
 
 **Getting Started**
 
