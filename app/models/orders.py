@@ -1,6 +1,6 @@
 orders = []
-
 ID=0
+
 def generate_orderId(orders):# pragma: no cover
     """Function to generate orderId"""
     global ID
