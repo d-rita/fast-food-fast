@@ -1,7 +1,8 @@
 class User(object):
-    """This class defines the instance of a User"""
+    """This class defines a User model"""
 
     def __init__(self, userId, username, email, password, user_state):
+        """Initialises user attributes"""
         self.userId=userId
         self.username=username
         self.email=email
