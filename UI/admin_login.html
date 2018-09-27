@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin</title>
+    <title>Admin Log In</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
 </head>
@@ -12,12 +12,18 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Fast-Food-Fast</h1>
+            <h1>
+                <a href="user_login.html">Fast-Food-Fast</a>
+            </h1>
         </div>
         <!--endof header-->
         <div class="main">
+            <div class="image">
+                <img src="subway.jpg" alt="subway" height="500" width="650">
+            </div>
+            <!--endof image-->
             <div class="admin_login">
-                <form id="admin" method="POST">
+                <form action="admin_dashboard.html" id="admin" method="POST">
                     <fieldset>
                         <legend>Admin Log In</legend>
                         <input type="text" placeholder="Username">

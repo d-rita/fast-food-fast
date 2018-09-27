@@ -67,13 +67,9 @@ legend {
 }
 
 .sign-in,
+.admin_login,
 .user_signup {
     margin-left: 200px;
-}
-
-.admin_login,
-{
-    margin: 0 auto;
 }
 
 
