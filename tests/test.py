@@ -130,7 +130,11 @@ class TestOrdersApi(BaseTestCase):
         data = json.loads(response.data.decode())
         self.assertEqual(data.get('message'), 'Order does not exist')
 
-#Test Order Model Instance
+class TestOrderModel(BaseTestCase):
+    """
+    TestOrderModel inherits from BaseTestCase.
+    It defines method to test creation of an order instance.
+    """
     def test_order_class(self):
         """Test that instance of Order can be created"""
         order1 = Orders(1, 'Bunga', 'burger', 22000, '12/02/2018', 'Pending')
