@@ -1,10 +1,12 @@
-orders = []
-ID=0
+"""This is the orders module"""
+ORDERS = []
 
-def generate_orderId(orders):# pragma: no cover
+ID = 0
+
+def generate_orderid(orders):# pragma: no cover
     """Function to generate orderId"""
     global ID
-    if len(orders)==0:
+    if len(orders) == 0:
         ID = len(orders)+1
     else:
         ID = ID+1
@@ -12,11 +14,11 @@ def generate_orderId(orders):# pragma: no cover
 
 class Orders(object):
     """Orders module to define order attributes"""
-    def __init__(self, orderId,location,name, price, date, status):
+    def __init__(self, orderid, location, name, price, date, status):
         """Initializes order attributes"""
-        self.orderId=orderId
-        self.location=location
-        self.name=name
-        self.price=price
-        self.date=date
-        self.status=status
+        self.orderid = orderid
+        self.location = location
+        self.name = name
+        self.price = price
+        self.date = date
+        self.status = status
