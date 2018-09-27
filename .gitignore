@@ -1,5 +1,5 @@
-app/
-.vscode/
 .pytest_cache/
+.vscode/
+app/
 tests/
 venv/
