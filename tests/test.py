@@ -31,10 +31,8 @@ class BaseTestCase(unittest.TestCase):
                 date=date,
                 status=status
             )
-
         ),
-        content_type='application/json'
-    )
+        content_type='application/json')
 
     def get_orders(self):
         """Return all orders"""
@@ -56,8 +54,7 @@ class BaseTestCase(unittest.TestCase):
                 status=status
             )
         ),
-        content_type='application/json'
-    )
+        content_type='application/json')
 
 class TestOrdersApi(BaseTestCase):
     """

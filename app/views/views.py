@@ -7,9 +7,8 @@ from flask import jsonify, make_response, request
 from app import app
 from app.models.orders import generate_orderid, ORDERS
 
-for_today = datetime.datetime.now().date()
+FOR_TODAY = datetime.datetime.now().date()
 
-#GET ALL ORDERS
 @app.route('/api/v1/orders', methods=['GET'])
 def get_all_orders():
     """
@@ -22,10 +21,8 @@ def get_all_orders():
     """
     if ORDERS:
         return make_response(jsonify({'orders': ORDERS}), 200)
-    else:
-        return make_response(jsonify({'message':'No orders'}), 404)
+    return make_response(jsonify({'message':'No orders'}), 404)
 
-#FETCH A PARTICULAR ORDER
 @app.route('/api/v1/orders/<int:orderId>', methods=['GET'])
 def get_an_order(orderId):
     """
@@ -44,7 +41,6 @@ def get_an_order(orderId):
             return make_response(jsonify(order), 200)
     return make_response(jsonify({'message': 'Order not found'}), 404)
 
-#CREATE A NEW ORDER
 @app.route('/api/v1/orders', methods=['POST'])
 def add_order():
     """
@@ -61,7 +57,7 @@ def add_order():
         'location':input_data['location'],
         'name':input_data['name'],
         'price':input_data['price'],
-        'date':for_today,
+        'date':FOR_TODAY,
         'status':'Pending'
     }
     name = order['name']
@@ -75,11 +71,10 @@ def add_order():
         return make_response(jsonify('Please enter digits only'), 400)
     elif not isinstance(location, str) or not re.search(r'^[a-zA-Z]+$', location):
         return make_response(jsonify('Please enter letters only'), 400)
-    else:
-        ORDERS.append(order)
-        return make_response(jsonify({'added_order': order, 'message': "Order sent successfully"}), 201)
 
-#Update status of order
+    ORDERS.append(order)
+    return make_response(jsonify({'added_order': order, 'message': "Order sent successfully"}), 201)
+
 @app.route('/api/v1/orders/<int:orderId>', methods=['PUT'])
 def update_order_status(orderId):
     """
