@@ -50,6 +50,7 @@ input[type=submit] {
     border: none;
     cursor: pointer;
     width: 100%;
+    outline: none;
 }
 
 fieldset {
@@ -111,6 +112,10 @@ td {
     padding: 20px;
 }
 
+button {
+    outline: none;
+}
+
 .nav ul li a:hover {
     background-color: #ffc266;
 }
@@ -153,7 +158,8 @@ td {
     margin-left: 250px;
 }
 
-input[type=button] {
+input[type=button],
+button {
     background-color: #ffc266;
     font-weight: bold;
     border-radius: 12px;
@@ -161,6 +167,7 @@ input[type=button] {
     border: none;
     cursor: pointer;
     width: 100%;
+    outline: none;
 }
 
 .edit {
