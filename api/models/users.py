@@ -6,4 +6,13 @@ class Users:
         self.username = username
         self.password = password
 
+    def define_user(self):
+        pass
+
+    def add_user_order(self):
+        pass
+
+    def get_order_history(self):
+        pass
+
     

@@ -1,19 +1,14 @@
 import psycopg2
 
-conn = psycopg2.connect(dbname="fastfooddb", user="postgres", password="diana", host="localhost")
-print('Database successfully connected')
-cur = conn.cursor()
-
 class DatabaseConnection:
-    """class holding database queries"""
+    
     def __init__(self):
         """initialises database connections"""
-        self.conn = conn
-        self.cur = cur
+        self.conn = psycopg2.connect(dbname="fastfood", user="postgres", password="diana", host="localhost")
+        self.cur = self.conn.cursor()
         self.autocommit = True
 
     def create_all_tables(self):
-        """create the tables for database"""
         commands = (
             '''CREATE TABLE IF NOT EXISTS users(
                 user_id SERIAL PRIMARY KEY,

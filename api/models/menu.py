@@ -11,3 +11,5 @@ class Menu:
         if self.food_name not in self.menu:
             self.menu['food_name'] = self.food_name
             self.menu['food_price'] = self.food_price
+        else:
+            return 'Food already exists'
