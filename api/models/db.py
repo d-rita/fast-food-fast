@@ -1,3 +1,4 @@
+"""Database module"""
 import psycopg2
 
 class DatabaseConnection:
@@ -7,7 +8,7 @@ class DatabaseConnection:
         self.conn = psycopg2.connect(dbname="fastfooddb", user="postgres", password="diana", host="localhost")
         #self.conn.rollback()
         self.cur = self.conn.cursor()
-        #self.autocommit = True
+        self.conn.autocommit = True
 
     def create_all_tables(self): 
         try: 
