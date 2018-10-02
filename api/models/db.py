@@ -2,6 +2,7 @@
 import psycopg2
 
 class DatabaseConnection:
+    """This class sets up a database connection and creates tables """
     
     def __init__(self):
         """initialises database connections"""
