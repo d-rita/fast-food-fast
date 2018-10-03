@@ -41,3 +41,7 @@ class Orders:
             order_list.append(ords)
         return order_list
    
+    @classmethod
+    def update_status(cls, order_id, order_status):
+        valid_status = ['Complete', 'Processing', 'Cancelled']
+        query='''UPDATE orders SET order_status={} WHERE order_id = {}'''.format(valid_status, order_id)

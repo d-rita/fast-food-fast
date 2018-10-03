@@ -1,4 +1,5 @@
 from flask import make_response, jsonify, Blueprint, request
+import psycopg2
 
 from api import app
 from api.models.orders import Orders
@@ -21,18 +22,22 @@ def get_user_orders(user_id):
         return jsonify({'message': 'You have no order history!'}), 404
     return jsonify({'message':'This is your order history', 'Your orders':my_orders}), 200
 
-@user_bp.route('/orders', methods=['POST'])
+@user_bp.route('/orders', methods=['POST'])#Validate food and user ids
 def add_one_user_order():
     """Place an order by user"""
-    data = request.get_json()
-    if not data:
-        return jsonify({'message': 'Data should be in JSON!'}), 400
-    location = data['location']
-    date = datetime.datetime.utcnow()
-    order_status = 'New'
-    menu_id = data['food_id']
-    user_id = data['user_id']
-    my_order = Orders(location=location, date=date, status=order_status, menu_id=menu_id, user_id=user_id)
-    my_order.add_an_order(location, date, order_status, menu_id, user_id)
-    return jsonify({'added_order': my_order,'message': 'Create one food order'})
+    try:
+
+        data = request.get_json()
+        if not data:
+            return jsonify({'message': 'Data should be in JSON!'}), 400
+        location = data['location']
+        date = datetime.datetime.utcnow()
+        order_status = 'New'
+        menu_id = data['food_id'] 
+        user_id = data['user_id']
+        my_order = Orders(location=location, date=date, status=order_status, menu_id=menu_id, user_id=user_id)
+        my_order.add_an_order(location, date, order_status, menu_id, user_id)
+        return jsonify({'added_order': my_order,'message': 'Create one food order'})
+    except (psycopg2.DatabaseError, TypeError, psycopg2.DataError, KeyError) as e:
+        return(e)
 

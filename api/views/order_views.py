@@ -6,6 +6,7 @@ order_bp = Blueprint('order_bp', __name__)
 
 @order_bp.route('/orders', methods=['GET'])
 def get_orders():
+    """Get all orders"""
     return jsonify({'message': 'All orders are returned!'})
 
 @order_bp.route('/orders/<int:order_id>', methods=['GET'])

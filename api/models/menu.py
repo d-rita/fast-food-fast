@@ -39,13 +39,4 @@ class Menu:
 
 
 
-
-    @staticmethod
-    def my_menu(food):
-        return {
-            "food_name":food[0],
-            "food_price":food[1]
-        }
-
-
         
