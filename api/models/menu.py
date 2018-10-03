@@ -10,7 +10,7 @@ class Menu:
 
     def add_food_item(self, f_name, f_price):
         query = '''INSERT INTO menus (food_name, food_price)
-        VALUES ('{}', '{}')'''.format(
+        VALUES ('{}', '{}') RETURNING menu_id'''.format(
             self.f_name,
             self.f_price
             )
@@ -19,15 +19,25 @@ class Menu:
 
     @classmethod
     def get_menu(cls):
-        menu_list=[]
-        query = '''SELECT * FROM menus'''
-        my_db = DatabaseConnection()
-        my_db.cur.execute(query)
-        foods = my_db.cur.fetchall()
-        if foods:
+        try: 
+            query = '''SELECT * FROM menus'''
+            my_db = DatabaseConnection()
+            my_db.cur.execute(query)
+            foods = my_db.cur.fetchall()
+            my_db.conn.commit()
+            #print('##########',foods)
+            menu_list=[]
             for food in foods:
-                menu_list.append(Menu.my_menu(food))
-                return menu_list
+                fd = {}
+                fd['menu_id'] = food[0]
+                fd['food_name'] = food[1]
+                fd['food_price'] = food[2]
+                menu_list.append(fd)
+                #print('================', menu_list)
+            return menu_list
+        except KeyError as e:
+            print(e)
+
 
 
 
