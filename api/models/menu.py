@@ -25,7 +25,6 @@ class Menu:
             my_db.cur.execute(query)
             foods = my_db.cur.fetchall()
             my_db.conn.commit()
-            #print('##########',foods)
             menu_list=[]
             for food in foods:
                 fd = {}

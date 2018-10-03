@@ -8,8 +8,7 @@ menu_bp = Blueprint('menu_bp', __name__)
 
 @menu_bp.route('/menu', methods=['GET'])
 def get_menu():
-    my_menu = Menu.get_menu()
-    #print('#############',my_menu)
+    my_menu = Menu.get_menu()   
     return jsonify({'message':'Menu successfully returned', 'Menu': my_menu}), 200
 
 @menu_bp.route('/menu', methods=['POST'])
