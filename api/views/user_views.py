@@ -1,24 +1,15 @@
-from flask import make_response, jsonify, Blueprint, request
+import datetime
+
 import psycopg2
-from api.models.db import DatabaseConnection
+from flask import Blueprint, jsonify, make_response, request
 
 from api import app
+from api.models.db import DatabaseConnection
+from api.models.menu import Menu, get_food_by_id
 from api.models.orders import Orders
-from api.models.menu import Menu
-import datetime
 
 user_bp = Blueprint('user_bp', __name__)
 
-def get_food_by_id(menu_id):
-    try: 
-        my_db = DatabaseConnection()
-        my_db.cur.execute('''SELECT menu_id FROM menus WHERE menu_id = {}'''.format(menu_id))
-        fds_id = my_db.cur.fetchone()
-        fd={}
-        fd['id']=fds_id[0]
-        return fd['id']
-    except:
-        return jsonify({'message': 'Food does not exist'}), 400
 
 @user_bp.route('/<int:user_id>/orders', methods=['GET'])####work on this
 def get_user_orders(user_id):

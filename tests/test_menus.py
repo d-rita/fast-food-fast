@@ -4,7 +4,7 @@ import psycopg2
 from api.models.db import DatabaseConnection
 from api.views import menu_views
 
-class TestOrders(BaseTestCase):
+class TestMenus(BaseTestCase):
     def test_get_menu(self):
         self.add_menu(1, 'Pizza', 12000)
         resp = self.get_menus()
