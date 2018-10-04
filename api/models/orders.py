@@ -1,6 +1,7 @@
 """Orders module"""
 import psycopg2
 from api.models.db import DatabaseConnection
+from api.models.menu import Menu
 class Orders:
     """Orders class defining methods and variables"""
     def __init__(self, location, date, status, menu_id, user_id):
@@ -21,6 +22,7 @@ class Orders:
         )
         my_db = DatabaseConnection()
         my_db.cur.execute(query)
+        
 
     @classmethod
     def get_user_orders(cls, user_id):

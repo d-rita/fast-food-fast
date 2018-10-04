@@ -1,14 +1,16 @@
 """Database module"""
 import psycopg2
 
+conn = psycopg2.connect(dbname="fastfooddb", user="postgres", password="diana", host="localhost")
+cur = conn.cursor()
+
 class DatabaseConnection:
     """This class sets up a database connection and creates tables """
     
     def __init__(self):
         """initialises database connections"""
-        self.conn = psycopg2.connect(dbname="fastfooddb", user="postgres", password="diana", host="localhost")
-        #self.conn.rollback()
-        self.cur = self.conn.cursor()
+        self.conn = conn
+        self.cur = cur
         self.conn.autocommit = True
 
     def create_all_tables(self): 
@@ -19,40 +21,9 @@ class DatabaseConnection:
             self.conn.commit()
         except(psycopg2.DatabaseError):
             self.conn.rollback()
-    
-    # def add_food_query(self, query):
-    #     """Executes query to add food item"""
-    #     return self.cur.execute(query)
 
-    # def get_menu_query(self, query):
-    #     """Executes query to retrieve menu"""
-    #     return self.cur.execute(query)
-
-    # def place_order_query(self, query):
-    #     """Executes query to place order"""
-    #     return self.cur.execute(query)
-
-    # def get_all_query(self, query):
-    #     """Executes query to get all orders"""
-    #     return self.cur.execute(query)
-        
-    # def orders_history_query(self, query):
-    #     """Executes query to get a user's order history"""
-    #     return self.cur.execute(query)
-        
-    # def order_status_query(self, query):
-    #     """Executes query to update order status"""
-    #     return self.cur.execute(query)
-    
-    # def sign_up_query(self, query):
-    #     """Executes query to sign up a new user"""
-    #     return self.cur.execute(query)
-        
-    # def log_in_query(self, query):
-    #     """Executes query to log in a user"""
-    #     return self.cur.execute(query)
-        
-    # def get_order_query(self, query):
-    #     """Executes query to get one specific order"""
-    #     return self.cur.execute(query)
-        
+    def delete_all_tables(self):
+        self.cur.execute('''DROP TABLE users''') 
+        self.cur.execute('''DROP TABLE menus''')
+        self.cur.execute('''DROP TABLE orders''')
+   

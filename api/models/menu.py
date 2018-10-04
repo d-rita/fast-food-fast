@@ -1,5 +1,6 @@
 """Menu module"""
 from api.models.db import DatabaseConnection
+from flask import jsonify
 
 
 class Menu:
@@ -32,11 +33,9 @@ class Menu:
                 fd['food_name'] = food[1]
                 fd['food_price'] = food[2]
                 menu_list.append(fd)
-                #print('================', menu_list)
             return menu_list
         except KeyError as e:
             print(e)
-
-
+    
 
         
