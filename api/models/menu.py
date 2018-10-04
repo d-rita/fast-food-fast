@@ -2,6 +2,16 @@
 from api.models.db import DatabaseConnection
 from flask import jsonify
 
+def get_food_by_id(menu_id):
+    try: 
+        my_db = DatabaseConnection()
+        my_db.cur.execute('''SELECT menu_id FROM menus WHERE menu_id = {}'''.format(menu_id))
+        fds_id = my_db.cur.fetchone()
+        fd={}
+        fd['id']=fds_id[0]
+        return fd['id']
+    except:
+        return jsonify({'message': 'Food does not exist'}), 400
 
 class Menu:
     """Menu class to define Menu methods and variables"""
@@ -38,4 +48,4 @@ class Menu:
             print(e)
     
 
-        
+       
