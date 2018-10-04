@@ -3,6 +3,7 @@ import os
 class Config(object):
     """Parent Configuration Class"""
     DEBUG = False
+    SECRET_KEY = 'mysecret'
 
 class DevelopmentConfig(Config):
     """Configurations for Development"""
