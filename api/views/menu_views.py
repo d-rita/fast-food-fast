@@ -9,7 +9,7 @@ menu_bp = Blueprint('menu_bp', __name__)
 @menu_bp.route('/menu', methods=['GET'])
 def get_menu():
     my_menu = Menu.get_menu()   
-    return jsonify({'message':'Menu successfully returned', 'Menu': my_menu}), 200
+    return make_response(jsonify({'message':'Menu successfully returned', 'Menu': my_menu}), 200)
 
 @menu_bp.route('/menu', methods=['POST'])
 def add_menu_option():  
@@ -20,5 +20,5 @@ def add_menu_option():
     food_price = data['price']
     food = Menu(f_name=food_name, f_price=food_price)
     food.add_food_item(food_name, food_price)
-    return jsonify({'message': 'Order successfully added!'}), 200
+    return jsonify({'message': 'Order successfully added!'}), 201
     
