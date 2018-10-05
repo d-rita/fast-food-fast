@@ -1,10 +1,8 @@
 """Orders module"""
-import psycopg2
 from flask import jsonify
 
 from api.models.db import DatabaseConnection
 from api.models.menu import Menu
-
 
 class Orders:
     """Orders class defining methods and variables"""
