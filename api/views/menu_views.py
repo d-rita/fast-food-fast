@@ -1,6 +1,7 @@
 from flask import jsonify, make_response, request, Blueprint
 from api.models.menu import Menu
 from flask_jwt_extended import jwt_required, get_jwt_identity
+import re
 
 from api import app
 from api.models.db import DatabaseConnection
@@ -25,6 +26,12 @@ def add_menu_option():
                 return jsonify({'message': 'Data should be in json format!'}), 400
             food_name = data['name']
             food_price = data['price']
+            if not food_name or not food_price:
+                return jsonify({'message':'Fill in missing values'}), 400
+            elif not isinstance(food_name, str) or not re.search(r'^[a-zA-Z]+$', food_name):
+                return jsonify({'message': 'Please enter letters only'}), 400
+            elif not isinstance(food_price, int):
+                return jsonify({'message': 'Please enter numbers only'}), 400
             food = Menu(f_name=food_name, f_price=food_price)
             food.add_food_item(food_name, food_price)
             return jsonify({'message': 'Order successfully added!'}), 201

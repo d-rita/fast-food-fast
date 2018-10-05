@@ -1,4 +1,5 @@
 import datetime
+import re
 
 from flask import Blueprint, jsonify, make_response, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
@@ -9,7 +10,16 @@ from api.models.orders import Orders
 
 user_bp = Blueprint('user_bp', __name__)
 
-
+def validate_user_string(string):
+    response = ''
+    if not string:
+        response = None
+    elif not isinstance(string, str) or not re.search(r'^[a-zA-Z]+$', string):
+        response = None
+    else:
+        response = string
+    return response
+    
 @user_bp.route('/orders', methods=['GET'])
 @jwt_required
 def get_user_orders():
@@ -33,16 +43,22 @@ def add_one_user_order():
             return jsonify({'message': 'Data should be in JSON!'}), 400
         logged_in = get_jwt_identity()
         user_id = data['user_id']
-        location = data['location']
+        location = validate_user_string(data['location'])
         date = datetime.datetime.utcnow()
         order_status = 'New'
         menu_id = get_food_by_id(data['food_id'])
+        if not user_id or not menu_id:
+            return jsonify({'message': 'Fill in blank fields'}), 400
+        elif not isinstance(user_id, int) or not isinstance(menu_id, int):
+            return jsonify({'message': 'Id must be an integer' })
         if user_id == logged_in['user_id']:
             if menu_id is None:
                 return jsonify({'message':'Food is not on the menu'}), 404
+            elif location is None:
+                return jsonify({'message':'Invalid location'})
             my_order = Orders(location=location, date=date, status=order_status, menu_id=menu_id, user_id=user_id)
             my_order.add_an_order(location, date, order_status, menu_id, user_id)
             return jsonify({'message':'Created one food order'})
         return jsonify({'message':'User must first log in!'}), 401
-    except KeyError:
-        return jsonify({'message': 'Missing parameter: fill in user_id, location and menu_id'})
+    except KeyError:    
+        return jsonify({'message': 'Missing parameter: fill in user_id, location and food_id'})
