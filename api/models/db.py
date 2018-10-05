@@ -1,5 +1,6 @@
 """Database module"""
 import psycopg2
+from api import app
 
 conn = psycopg2.connect(dbname="fastfooddb", user="postgres", password="diana", host="localhost")
 cur = conn.cursor()
@@ -23,7 +24,8 @@ class DatabaseConnection:
             self.conn.rollback()
 
     def delete_all_tables(self):
+        self.cur.execute('''DROP TABLE orders''')
         self.cur.execute('''DROP TABLE users''') 
         self.cur.execute('''DROP TABLE menus''')
-        self.cur.execute('''DROP TABLE orders''')
+        
    

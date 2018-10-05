@@ -89,7 +89,6 @@ class Orders:
                 u_ord['user_id'] = updated[5]
                 orders_list.append(u_ord)
             return orders_list
-        #
 
     @classmethod
     def get_an_order(cls, order_id):
@@ -107,4 +106,3 @@ class Orders:
             ords['user_id'] = order[5]
             return ords
         return None
-        #return ('Order does not exist!')

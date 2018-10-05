@@ -1,10 +1,8 @@
 import datetime
-
-import psycopg2
 from flask import Blueprint, jsonify, make_response, request
 
 from api import app
-from api.models.db import DatabaseConnection
+
 from api.models.menu import Menu, get_food_by_id
 from api.models.orders import Orders
 
