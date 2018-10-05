@@ -30,7 +30,7 @@ def sign_up():
         user.add_user(user_name, user_email, user_password)
         return jsonify({'message':'New user added'}), 201
     except KeyError:
-        return jsonify({'message':'Missing key parameter'}), 400
+        return jsonify({'message':'Missing key parameter: username, email, password'}), 400
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
@@ -45,4 +45,4 @@ def login():
             return jsonify({'Successfully logged in': logged_in})
         return jsonify({'message':'Invalid password or username'}), 400  
     except KeyError:
-        return jsonify({'message': 'Missing key parameter'}), 400
+        return jsonify({'message': 'Missing key parameter: username, password'}), 400

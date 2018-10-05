@@ -1,5 +1,6 @@
 """Users module"""
 from api.models.db import DatabaseConnection
+import re
 from flask_jwt_extended import create_access_token
 from api import app
 from flask import jsonify
@@ -36,7 +37,6 @@ class Users:
         else: 
             response = None
         return response
-    
-    
+
 
     
