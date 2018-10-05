@@ -7,7 +7,6 @@
 
 Fast-Food-Fast is a delivery service for a restaurant. 
 
-It is currently hosted on Heroku at https://diana-fast-food-fast.herokuapp.com/api/v1/orders
 
 **UI**
 
