@@ -1,7 +1,7 @@
 """BaseTest module"""
 import unittest
 import  json
-import psycopg2
+
 from api import app
 
 from api.views import user_views, order_views, auth, menu_views
