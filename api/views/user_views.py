@@ -58,7 +58,7 @@ def add_one_user_order():
                 return jsonify({'message':'Invalid location'})
             my_order = Orders(location=location, date=date, status=order_status, menu_id=menu_id, user_id=user_id)
             my_order.add_an_order(location, date, order_status, menu_id, user_id)
-            return jsonify({'message':'Created one food order'})
+            return jsonify({'message':'Created one food order'}), 201
         return jsonify({'message':'User must first log in!'}), 401
     except KeyError:    
         return jsonify({'message': 'Missing parameter: fill in user_id, location and food_id'})

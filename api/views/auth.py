@@ -20,7 +20,7 @@ def sign_up():
         user_password = data['password']
         if not user_name or not user_email or not user_password:
             return jsonify({"message": "field cannot be blank"}), 400                              
-        elif not re.search(r'^[a-zA-Z]+$', user_name):
+        elif not re.search(r'^[a-zA-Z]+$', user_name) or not isinstance(user_name, str):
             return jsonify({'message': 'Username can only contain letters'}), 400                           
         elif not re.search(r'[^@#]+@[^@#]+\.[^@#]+', user_email):
             return jsonify({'message':'Invalid email format'}), 400           
@@ -40,9 +40,9 @@ def login():
             return jsonify({'message': 'Data should be in JSON format!'}), 400
         username = data['username']
         password = data['password']
-        logged_in = Users.check_user_credentials(username, password)
-        if logged_in is not None:
-            return jsonify({'Successfully logged in': logged_in})
+        user = Users.check_user_credentials(username, password)
+        if user is not None:
+            return jsonify({'message':'Successfully logged in', 'Token': user}), 200
         return jsonify({'message':'Invalid password or username'}), 400  
     except KeyError:
         return jsonify({'message': 'Missing key parameter: username, password'}), 400
