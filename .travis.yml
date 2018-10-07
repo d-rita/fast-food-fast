@@ -7,7 +7,7 @@ install:
 
 # command to run tests
 script:
-  - pytest tests --cov=app --cov-report term missing
+  - pytest tests --cov=api 
 
 after_success:
   - coveralls
