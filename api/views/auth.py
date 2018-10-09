@@ -42,7 +42,7 @@ def login():
         password = data['password']
         user = Users.check_user_credentials(username, password)
         if user is not None:
-            return jsonify({'message':'Successfully logged in', 'Token': user}), 200
+            return jsonify({'message':'Successfully logged in', 'token': user}), 200
         return jsonify({'message':'Invalid password or username'}), 400  
     except KeyError:
         return jsonify({'message': 'Missing key parameter: username, password'}), 400
