@@ -26,16 +26,18 @@ def add_menu_option():
                 return jsonify({'message': 'Data should be in json format!'}), 400
             food_name = data['name']
             food_price = data['price']
-            if not food_name or not food_price:
-                return jsonify({'message':'Fill in missing values'}), 400
+            if not food_name:
+                return jsonify({'message':'Fill in food name'}), 400
+            elif not food_price:
+                return jsonify({'message':'Fill in food price'}), 400
             elif not isinstance(food_name, str) or not re.search(r'^[a-zA-Z]+$', food_name):
                 return jsonify({'message': 'Please enter letters only'}), 400
             elif not isinstance(food_price, int):
                 return jsonify({'message': 'Please enter numbers only'}), 400
             food = Menu(f_name=food_name, f_price=food_price)
             food.add_food_item(food_name, food_price)
-            return jsonify({'message': 'Order successfully added!'}), 201
+            return jsonify({'message': 'Food successfully added!'}), 201
         except KeyError:
-            return jsonify({'message':'Fill in all parameters: name and price'})
+            return jsonify({'message':'Fill in all parameters: name and price'}), 400
     return jsonify({'message':'Only admins allowed'}), 401
     

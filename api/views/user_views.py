@@ -30,8 +30,8 @@ def get_user_orders():
         my_orders = Orders.get_user_orders(user_id)
         if len(my_orders)==0:
             return jsonify({'message': 'You have no order history!'}), 404
-        return jsonify({'message':'This is your order history', 'Your orders':my_orders}), 200
-    return jsonify({'message':'Log in to get your orders'}), 401
+        return jsonify({'message':'Your order history has been returned', 'Your orders':my_orders}), 200
+    return jsonify({'message':'Log in to get your order history'}), 401
 
 @user_bp.route('/orders', methods=['POST'])
 @jwt_required
@@ -42,23 +42,25 @@ def add_one_user_order():
         if not data:
             return jsonify({'message': 'Data should be in JSON!'}), 400
         logged_in = get_jwt_identity()
-        user_id = data['user_id']
-        location = validate_user_string(data['location'])
+        user_id = logged_in['user_id']
+        user_location = data['location']
         date = datetime.datetime.utcnow()
         order_status = 'New'
-        menu_id = get_food_by_id(data['food_id'])
-        if not user_id or not menu_id:
-            return jsonify({'message': 'Fill in blank fields'}), 400
-        elif not isinstance(user_id, int) or not isinstance(menu_id, int):
-            return jsonify({'message': 'Id must be an integer' })
-        if user_id == logged_in['user_id']:
-            if menu_id is None:
-                return jsonify({'message':'Food is not on the menu'}), 404
-            elif location is None:
-                return jsonify({'message':'Invalid location'})
-            my_order = Orders(location=location, date=date, status=order_status, menu_id=menu_id, user_id=user_id)
-            my_order.add_an_order(location, date, order_status, menu_id, user_id)
-            return jsonify({'message':'Created one food order'}), 201
-        return jsonify({'message':'User must first log in!'}), 401
+        food_id = data['food_id']
+        if not food_id:
+            return jsonify({'message': 'Fill in the menu_id'}), 400
+        elif not user_location:
+            return jsonify({'message': 'Fill in the location'}), 400
+        elif not isinstance(food_id, int):
+            return jsonify({'message': 'Id must be an integer' }), 400
+        menu_id = get_food_by_id(food_id)
+        if menu_id is None:
+            return jsonify({'message':'Food is not on the menu'}), 404
+        location = validate_user_string(user_location)
+        if location is None:
+            return jsonify({'message':'Invalid location'}), 400
+        my_order = Orders(location=location, date=date, status=order_status, menu_id=menu_id, user_id=user_id)
+        my_order.add_an_order(location, date, order_status, menu_id, user_id)
+        return jsonify({'message':'Created one food order'}), 201
     except KeyError:    
-        return jsonify({'message': 'Missing parameter: fill in user_id, location and food_id'})
+        return jsonify({'message': 'Missing parameter: fill in location and food_id'}), 400
