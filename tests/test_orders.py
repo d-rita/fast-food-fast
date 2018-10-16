@@ -2,51 +2,144 @@
 from tests.base_test import BaseTestCase
 import json
 
-
-#from api.views import menu_views
-
-class TestOrders(BaseTestCase):
-
-
+class TestOrdersAPIs(BaseTestCase):
+    
    #get all orders
     def test_get_all_orders_not_admin(self):
-        self.signup_user('Diana', 'meclient', 'diana@gmail.com', False)
-        response1 = self.login_user('Diana', 'meclient')
-        self.token = json.loads(response1.data.decode())["token"]
-        response2 = self.client.get('/api/v1/orders',
-        headers=dict(Authorization='Bearer ' + self.token),
+        """Test that non admin cannot get all orders """
+        response1 = self.client.get('/api/v1/orders',
+        headers=dict(Authorization='Bearer '+ self.login_user()),
         content_type='application/json')
-        self.assertEqual(response2.status_code, 401)
+        self.assertEqual(response1.status_code, 401)
+        self.assertIn(b'Only an admin can access all orders', response1.data)
+
 
     def test_get_non_existing_orders(self):
-        self.signup_user('Rita', 'hedwig', 'rita@gmail.com', True)
-        response1 = self.login_user('Rita', 'hedwig')
-        data = json.loads(response1.data.decode())
-        self.token = data.get('token')
-        response2 = self.client.get('/api/v1/orders',
-        headers=({'token': self.token}),
+        """Tests that an admin cannot retrieve empty orders list"""
+        response1 = self.client.get('/api/v1/orders',
+        headers=dict(Authorization='Bearer '+ self.login_admin()),
         content_type='application/json')
-        self.assertEqual(response2.status_code, 404)
+        self.assertEqual(response1.status_code, 404)
+        self.assertIn(b'There are no orders', response1.data)
+
+    def test_get_non_existing_order_not_admin(self):
+        """Tests that non admin cannot retrieve a particular order"""
+        response1 = self.client.get('/api/v1/orders/1',
+        headers=dict(Authorization='Bearer '+ self.login_user()),
+        content_type='application/json')
+        self.assertEqual(response1.status_code, 401)
+        self.assertIn(b'Only an admin can access all orders', response1.data)
+
+
+    def test_get_non_existing_order(self):
+        """Test that admin cannot retrieve non existent order"""
+        response1 = self.client.get('/api/v1/orders/1',
+        headers=dict(Authorization='Bearer '+ self.login_admin()),
+        content_type='application/json')
+        self.assertEqual(response1.status_code, 404)
+        self.assertIn(b'Order does not exist', response1.data)
 
     def test_get_existing_orders(self):
-        self.signup_user('Rita', 'hedwig', 'rita@gmail.com', True)
-        response1 = self.login_user('Rita', 'hedwig')
-        data = json.loads(response1.data.decode())
-        self.token = data.get('token')
-        self.add_order(self.token, 1, 'Bunga', '12/03/2018', 'New', 1, 1)
-        self.add_order(self.token, 2, 'Bunamwaya', '12/10/2018', 'New', 1, 1)
-        response2 = self.client.get('/api/v1/orders',
-        headers=({'token': self.token}),
+        """Test to retrieve all orders by admin"""
+        self.client.post('/api/v1/menu',
+            headers=dict(Authorization='Bearer ' + self.login_admin()),
+            data=json.dumps(dict(
+                name='Burger',
+                price=12000
+            )
+        ),
         content_type='application/json')
-        self.assertEqual(response2.status_code, 404)
+        self.client.post('/api/v1/users/orders',
+        headers=dict(Authorization='Bearer '+ self.login_user()),
+        data=json.dumps(dict(
+                location='Bunga',
+                food_id=1
+        )),
+        content_type='application/json')
+        self.client.post('/api/v1/users/orders',
+        headers=dict(Authorization='Bearer '+ self.login_user()),
+        data=json.dumps(dict(
+                location='Kamwokya',
+                food_id=1
+        )),
+        content_type='application/json')
+        response = self.client.get('/api/v1/orders',
+        headers=dict(Authorization='Bearer '+ self.login_admin()),
+        content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'All orders are returned!', response.data)
 
+    def test_get_specific_order(self):
+        """Test to retrieve a specific order by admin"""
+        self.client.post('/api/v1/menu',
+            headers=dict(Authorization='Bearer ' + self.login_admin()),
+            data=json.dumps(dict(
+                name='Burger',
+                price=12000
+            )
+        ),
+        content_type='application/json')
+        self.client.post('/api/v1/users/orders',
+        headers=dict(Authorization='Bearer '+ self.login_user()),
+        data=json.dumps(dict(
+                location='Bunga',
+                food_id=1
+        )),
+        content_type='application/json')
+        response = self.client.get('/api/v1/orders/1',
+        headers=dict(Authorization='Bearer '+ self.login_admin()),
+        content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'One order has been returned', response.data)
 
-    #add an order
-    def test_add_an_order_not_logged_in(self):
-        resp = self.add_order(1, 'Bunga', '12/03/2018', 'New', 1, 2)
-        self.assertEqual(resp.status_code, 401)
+    def test_update_order_status(self):
+        """Test to update order status by admin"""
+        self.client.post('/api/v1/menu',
+            headers=dict(Authorization='Bearer ' + self.login_admin()),
+            data=json.dumps(dict(
+                name='Burger',
+                price=12000
+            )
+        ),
+        content_type='application/json')
+        self.client.post('/api/v1/users/orders',
+        headers=dict(Authorization='Bearer '+ self.login_user()),
+        data=json.dumps(dict(
+                location='Bunga',
+                food_id=1
+        )),
+        content_type='application/json')
+        response = self.client.put('/api/v1/orders/1',
+        headers=dict(Authorization='Bearer '+ self.login_admin()),
+        data=json.dumps(dict(
+            order_status='Processing'
+        )),
+        content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Order status updated', response.data)
 
-    #get an order
-
-
-
+    def test_update_order_status_non_admin(self):
+        """Test to update order status by non  admin"""
+        self.client.post('/api/v1/menu',
+            headers=dict(Authorization='Bearer ' + self.login_admin()),
+            data=json.dumps(dict(
+                name='Burger',
+                price=12000
+            )
+        ),
+        content_type='application/json')
+        self.client.post('/api/v1/users/orders',
+        headers=dict(Authorization='Bearer '+ self.login_user()),
+        data=json.dumps(dict(
+                location='Bunga',
+                food_id=1
+        )),
+        content_type='application/json')
+        response = self.client.put('/api/v1/orders/1',
+        headers=dict(Authorization='Bearer '+ self.login_user()),
+        data=json.dumps(dict(
+            order_status='Processing'
+        )),
+        content_type='application/json')
+        self.assertEqual(response.status_code, 401)
+        self.assertIn(b'Only an admin can access all orders', response.data)
