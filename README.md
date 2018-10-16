@@ -81,7 +81,7 @@ python run.py
 
 - Tests can be run using 
 ```
-pytest tests/test.py
+pytest tests
 ```
 
 To get coverage report of tests, run:
