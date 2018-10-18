@@ -123,6 +123,26 @@ class TestAuthAPIs(BaseTestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn(b'Missing key parameter: username, email, password', response.data)
 
+    def test_cannot_add_same_user_twice(self):
+        """Tests to ensure same user cannot be signed up more than once"""
+        self.client.post('api/v1/auth/signup', 
+        data=json.dumps(dict(
+            username="Diana",
+            password='hogwarts',
+            email='diana@gmail.com',
+            admin=False
+        )),
+        content_type='application/json')
+        response = self.client.post('api/v1/auth/signup', 
+        data=json.dumps(dict(
+            username='Diana',
+            password='hogwarts',
+            email='diana@gmail.com',
+            admin=False
+        )),
+        content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertIn(b'User already exists!', response.data)
         #login tests
 
     def test_user_login_not_in_json(self):

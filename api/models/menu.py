@@ -44,6 +44,13 @@ class Menu:
             fd['food_price'] = food[2]
             menu_list.append(fd)
         return menu_list
-        
 
-       
+    @classmethod
+    def check_if_food_is_new(cls, name, price):
+        query = '''SELECT * FROM menus WHERE food_name = %s AND food_price = %s'''
+        my_db = DatabaseConnection()
+        my_db.cur.execute(query, (name, price))
+        user_count = my_db.cur.rowcount
+        if user_count > 0:
+            return False
+        return True     

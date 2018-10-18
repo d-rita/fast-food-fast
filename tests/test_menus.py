@@ -47,6 +47,27 @@ class TestMenusAPIs(BaseTestCase):
         self.assertEqual(resp1.status_code, 201)
         self.assertIn(b'Food successfully added!', resp1.data)
 
+    def test_cannot_add_food_twice(self):
+        """Tests that food cannot be added more than once by admin"""
+        self.client.post('/api/v1/menu',
+            headers=dict(Authorization='Bearer ' + self.login_admin()),
+            data=json.dumps(dict(
+                name='Burger',
+                price=12000
+            )
+        ),
+        content_type='application/json')
+        resp1 = self.client.post('/api/v1/menu',
+            headers=dict(Authorization='Bearer ' + self.login_admin()),
+            data=json.dumps(dict(
+                name='Burger',
+                price=12000
+            )
+        ),
+        content_type='application/json')
+        self.assertEqual(resp1.status_code, 400)
+        self.assertIn(b'Food already exists on the menu', resp1.data)
+
     def test_cannot_add_food_empty_name(self):
         """Tests that food cannot be added without name"""
         resp1 = self.client.post('/api/v1/menu',

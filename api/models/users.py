@@ -46,5 +46,18 @@ class Users:
         result = my_db.cur.fetchone()
         return result
 
+    @classmethod
+    def check_if_user_is_new(cls, username, email):
+        query = '''SELECT * FROM users WHERE username = %s AND email = %s'''
+        my_db = DatabaseConnection()
+        my_db.cur.execute(query, (username, email))
+        user_count = my_db.cur.rowcount
+        if user_count > 0:
+            return False
+        return True
+        
+
+
+
 
     

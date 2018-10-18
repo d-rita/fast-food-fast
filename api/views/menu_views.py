@@ -34,9 +34,12 @@ def add_menu_option():
                 return jsonify({'message': 'Please enter letters only'}), 400
             elif not isinstance(food_price, int):
                 return jsonify({'message': 'Please enter numbers only'}), 400
-            food = Menu(f_name=food_name, f_price=food_price)
-            food.add_food_item(food_name, food_price)
-            return jsonify({'message': 'Food successfully added!'}), 201
+            new_food = Menu.check_if_food_is_new(food_name, food_price)
+            if new_food == True:
+                food = Menu(f_name=food_name, f_price=food_price)
+                food.add_food_item(food_name, food_price)
+                return jsonify({'message': 'Food successfully added!'}), 201
+            return jsonify({'message': 'Food already exists on the menu'}), 400
         except KeyError:
             return jsonify({'message':'Fill in all parameters: name and price'}), 400
     return jsonify({'message':'Only admins allowed'}), 401
