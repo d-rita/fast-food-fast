@@ -35,15 +35,24 @@ class Menu:
         my_db = DatabaseConnection()
         my_db.cur.execute(query)
         foods = my_db.cur.fetchall()
-        my_db.conn.commit()
-        menu_list=[]
-        for food in foods:
-            fd = {}
-            fd['menu_id'] = food[0]
-            fd['food_name'] = food[1]
-            fd['food_price'] = food[2]
-            menu_list.append(fd)
-        return menu_list
-        
+        foods_count = my_db.cur.rowcount
+        if foods_count > 0:
+            menu_list=[]
+            for food in foods:
+                fd = {}
+                fd['menu_id'] = food[0]
+                fd['food_name'] = food[1]
+                fd['food_price'] = food[2]
+                menu_list.append(fd)
+            return menu_list
+        return None
 
-       
+    @classmethod
+    def check_if_food_is_new(cls, name, price):
+        query = '''SELECT * FROM menus WHERE food_name = %s AND food_price = %s'''
+        my_db = DatabaseConnection()
+        my_db.cur.execute(query, (name, price))
+        user_count = my_db.cur.rowcount
+        if user_count > 0:
+            return False
+        return True     

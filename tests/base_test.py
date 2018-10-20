@@ -1,16 +1,22 @@
 """BaseTest module"""
-import unittest
-import  json
+import json
 import os
+import unittest
 
 from api import app
 from api.models.db import DatabaseConnection
+from config import app_config
 
 test_db = DatabaseConnection()
 
 
 class BaseTestCase(unittest.TestCase):
     """Parent class with initial setup of test client and test database"""
+
+    def create_the_app(self):
+        """Create an instance of the app with the testing configuration"""
+        app.config.from_object(app_config['testing'])
+        return app
 
     def setUp(self):
         self.client = app.test_client(self)
@@ -67,4 +73,3 @@ class BaseTestCase(unittest.TestCase):
 
     def tearDown(self):
         test_db.delete_all_tables()
-
