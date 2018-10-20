@@ -12,7 +12,9 @@ menu_bp = Blueprint('menu_bp', __name__)
 @jwt_required
 def get_menu():
     user = get_jwt_identity()
-    my_menu = Menu.get_menu()   
+    my_menu = Menu.get_menu()  
+    if my_menu == None:
+        return make_response(jsonify({'message': 'There is no menu'}), 404) 
     return make_response(jsonify({'message':'Menu successfully returned', 'Menu': my_menu}), 200)
 
 @menu_bp.route('/menu', methods=['POST'])

@@ -2,6 +2,7 @@ import re
 
 from flask import Blueprint, jsonify, make_response, request
 from flask_jwt_extended import create_access_token, jwt_required
+from werkzeug.security import check_password_hash, generate_password_hash
 
 from api import app
 from api.models.db import DatabaseConnection
@@ -46,6 +47,10 @@ def login():
             return jsonify({'message': 'Data should be in JSON format!'}), 400
         username = data['username']
         password = data['password']
+        if not username:
+            return jsonify({'message': 'Please enter your username'}), 400
+        elif not password:
+            return jsonify({'message': 'Please enter your password'}), 400
         user_token = Users.check_user_credentials(username, password)
         if user_token is not None:
             return jsonify({'message':'Successfully logged in', 'token': user_token}), 200

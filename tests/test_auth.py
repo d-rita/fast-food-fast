@@ -191,7 +191,27 @@ class TestAuthAPIs(BaseTestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn(b'User must sign up before logging in', response.data)
 
-    def test_invalid_password_login(self):
+    def test_empty_password_login(self):
+        """Tests to ensure that user does not login with empty password"""
+        self.client.post('api/v1/auth/signup', 
+        data=json.dumps(dict(
+            username="Rita",
+            password="hedwig",
+            email="rita@gmail.com", 
+            admin=True
+        )),
+        content_type='application/json')
+        response = self.client.post('api/v1/auth/login', 
+        data=json.dumps(dict(
+            password="",
+            username="Rita"
+            )
+        ),
+        content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertIn(b'Please enter your password', response.data)
+
+    def test_wrong_password_login(self):
         """Tests to ensure that password matches username"""
         self.client.post('api/v1/auth/signup', 
         data=json.dumps(dict(
@@ -210,6 +230,26 @@ class TestAuthAPIs(BaseTestCase):
         content_type='application/json')
         self.assertEqual(response.status_code, 400)
         self.assertIn(b'User must sign up before logging in', response.data)
+
+    def test_empty_username_login(self):
+        """Tests to ensure that user does not login with empty username"""
+        self.client.post('api/v1/auth/signup', 
+        data=json.dumps(dict(
+            username="Rita",
+            password="hedwig",
+            email="rita@gmail.com", 
+            admin=True
+        )),
+        content_type='application/json')
+        response = self.client.post('api/v1/auth/login', 
+        data=json.dumps(dict(
+            password="hedwig",
+            username=""
+            )
+        ),
+        content_type='application/json')
+        self.assertEqual(response.status_code, 400)
+        self.assertIn(b'Please enter your username', response.data)
 
     def test_invalid_username_login(self):
         """Tests if usename matches password"""

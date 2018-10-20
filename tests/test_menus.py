@@ -154,3 +154,10 @@ class TestMenusAPIs(BaseTestCase):
         content_type='application/json')
         self.assertEqual(resp1.status_code, 200)
         self.assertIn(b'Menu successfully returned', resp1.data)
+
+    def test_return_non_existing_menu(self):
+        resp1 = self.client.get('api/v1/menu', 
+        headers=dict(Authorization='Bearer ' + self.login_user()), 
+        content_type='application/json')
+        self.assertEqual(resp1.status_code, 404)
+        self.assertIn(b'There is no menu', resp1.data)
