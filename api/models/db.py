@@ -2,8 +2,7 @@
 import psycopg2
 from api import app
 
-conn = psycopg2.connect(dbname="fastfooddb", user="postgres", password="diana", host="localhost")
-test_conn = psycopg2.connect(database="testdb", user="postgres", password="diana", host="localhost")
+conn = psycopg2.connect(dbname="d44f6hfmbs0tfq", user="ghzwbjivzerzbt", password="367fe74a9db0cf5d24a6c567c1712de7b7dfe3e1b099c0d426c544703fd2ae0c", host="ec2-50-17-225-140.compute-1.amazonaws.com")
 cur = conn.cursor()
 
 class DatabaseConnection:
