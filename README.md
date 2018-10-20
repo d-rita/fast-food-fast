@@ -1,7 +1,8 @@
 # fast-food-fast
 
-[![Build Status](https://travis-ci.com/d-rita/fast-food-fast.svg?branch=challenge3)](https://travis-ci.com/d-rita/fast-food-fast)
-[![Coverage Status](https://coveralls.io/repos/github/d-rita/fast-food-fast/badge.svg?branch=challenge3)](https://coveralls.io/github/d-rita/fast-food-fast?branch=challenge3)
+
+[![Build Status](https://travis-ci.com/d-rita/fast-food-fast.svg?branch=ft-add-food-api-160939634)](https://travis-ci.com/d-rita/fast-food-fast)
+[![Coverage Status](https://coveralls.io/repos/github/d-rita/fast-food-fast/badge.svg?branch=ft-add-food-api-160939634)](https://coveralls.io/github/d-rita/fast-food-fast?branch=ft-add-food-api-160939634)
 
 
 
@@ -80,14 +81,12 @@ python run.py
 
 - Tests can be run using 
 ```
-pytest tests/test.py
+pytest tests
 ```
 
 To get coverage report of tests, run:
+
 ```
-pip install pytest-cov
-```
-```
-pytest tests/test.py --cov=app --cov-report term missing
+pytest tests --cov=api
 ```
 

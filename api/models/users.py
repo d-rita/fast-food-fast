@@ -7,17 +7,19 @@ from flask import jsonify
 
 class Users:
     """Users class defining users methods and variables"""
-    def __init__(self, username, email, password):
+    def __init__(self, username, email, password, admin):
         self.username = username
         self.email = email
         self.password = password
+        self.admin = admin
 
-    def add_user(self, username, email, password):
-        query = '''INSERT INTO users (username, email, user_password)
-        VALUES ('{}', '{}', '{}') RETURNING user_id, admin'''.format(
+    def add_user(self, username, email, password, admin):
+        query = '''INSERT INTO users (username, email, user_password, admin)
+        VALUES ('{}', '{}', '{}', '{}') RETURNING user_id'''.format(
             self.username,
             self.email,
-            self.password
+            self.password,
+            self.admin
         )
         my_db = DatabaseConnection()
         my_db.cur.execute(query)
@@ -33,10 +35,29 @@ class Users:
         if user_count > 0:
             user = dict(user_id=existing_user[0], username=existing_user[1], email=existing_user[2], password=existing_user[3], admin=existing_user[4])
             token = create_access_token(identity=user)
-            response = token
-        else: 
-            response = None
-        return response
+            return token
+        return None
+
+    @classmethod
+    def check_if_admin(cls, userid):
+        query = '''SELECT admin FROM users WHERE user_id = {}'''.format(userid)
+        my_db = DatabaseConnection()
+        my_db.cur.execute(query)
+        result = my_db.cur.fetchone()
+        return result
+
+    @classmethod
+    def check_if_user_is_new(cls, username, email):
+        query = '''SELECT * FROM users WHERE username = %s AND email = %s'''
+        my_db = DatabaseConnection()
+        my_db.cur.execute(query, (username, email))
+        user_count = my_db.cur.rowcount
+        if user_count > 0:
+            return False
+        return True
+        
+
+
 
 
     
