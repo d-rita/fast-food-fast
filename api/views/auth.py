@@ -1,8 +1,8 @@
 import re
 
+from flasgger import swag_from
 from flask import Blueprint, jsonify, make_response, request
 from flask_jwt_extended import create_access_token, jwt_required
-from werkzeug.security import check_password_hash, generate_password_hash
 
 from api import app
 from api.models.db import DatabaseConnection
@@ -11,6 +11,7 @@ from api.models.users import Users
 auth_bp = Blueprint('auth_bp', __name__)
 
 @auth_bp.route('/signup', methods=['POST'])
+@swag_from("..docs/signup.yml")
 def sign_up():
     try: 
         data = request.get_json()
@@ -40,6 +41,7 @@ def sign_up():
         return jsonify({'message':'Missing key parameter: username, email, password, admin'}), 400
 
 @auth_bp.route('/login', methods=['POST'])
+@swag_from("..docs/login.yml")
 def login():
     try: 
         data = request.get_json()

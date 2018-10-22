@@ -12,6 +12,7 @@ install:
 before_script:
   - "psql -c 'create database d44f6hfmbs0tfq;' -U postgres"
 
+
 script:
   - pytest tests --cov=api 
 

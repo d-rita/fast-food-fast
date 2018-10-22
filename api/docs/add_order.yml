@@ -1,0 +1,31 @@
+Endpoint to Place order.
+---
+tags:
+    - Fast Food Fast Order
+parameters:
+    - name: token
+      in: header
+      description: A json web token generated for each loggged in user
+      required: true
+      type: string
+
+    - name: body
+      description: This contains details to place order.
+      in: body
+      required: true
+responses:
+  201:
+    description: Order successfully made.
+  400:
+    description: Failed to create the order
+  401:
+    description: Unauthorised access
+
+security:
+  - JWT:
+      description: Pass in jwt token. i.e Bearer <jwt>
+      type: apiKey
+      scheme: bearer
+      name: token
+      in: header
+      bearerFormat: JWT

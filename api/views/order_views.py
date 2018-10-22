@@ -1,12 +1,15 @@
+from flasgger import swag_from
 from flask import Blueprint, jsonify, make_response, request
-from flask_jwt_extended import jwt_required, get_jwt_identity
-from api.models.orders import Orders 
-from api.models.users import Users
+from flask_jwt_extended import get_jwt_identity, jwt_required
+
 from api import app
+from api.models.orders import Orders
+from api.models.users import Users
 
 order_bp = Blueprint('order_bp', __name__)
 
 @order_bp.route('/orders', methods=['GET'])
+@swag_from("..docs/get_orders.yml")
 @jwt_required
 def get_orders():
     """Get all orders"""
@@ -20,6 +23,7 @@ def get_orders():
     return jsonify({'message':'Only an admin can access all orders'}), 401
 
 @order_bp.route('/orders/<int:order_id>', methods=['GET'])
+@swag_from("..docs/get_an_order.yml")
 @jwt_required
 def get_an_order(order_id):
     logged_in_admin = get_jwt_identity()
@@ -32,6 +36,7 @@ def get_an_order(order_id):
     
 
 @order_bp.route('/orders/<int:order_id>', methods=['PUT'])
+@swag_from("..docs/update_order.yml")
 @jwt_required
 def update_order_status(order_id):
     logged_in = get_jwt_identity()

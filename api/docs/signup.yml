@@ -1,0 +1,17 @@
+Endpoint to register a new user
+---
+tags:
+  - Fast Food Fast User
+parameters:
+  - name: body
+    description: This contains user registration details
+    in: body
+    required: true
+
+responses:
+  201:
+    description: User successfully registered
+    
+  400:
+    description: User failed to register
+   

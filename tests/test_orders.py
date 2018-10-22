@@ -1,6 +1,8 @@
 """Module to test Orders model and views"""
-from tests.base_test import BaseTestCase
 import json
+
+from tests.base_test import BaseTestCase
+
 
 class TestOrdersAPIs(BaseTestCase):
     

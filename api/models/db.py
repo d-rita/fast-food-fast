@@ -1,6 +1,8 @@
 """Database module"""
 import psycopg2
+
 from api import app
+
 
 conn = psycopg2.connect(dbname="d44f6hfmbs0tfq", user="ghzwbjivzerzbt", password="367fe74a9db0cf5d24a6c567c1712de7b7dfe3e1b099c0d426c544703fd2ae0c", host="ec2-50-17-225-140.compute-1.amazonaws.com")
 cur = conn.cursor()
@@ -27,5 +29,3 @@ class DatabaseConnection:
         self.cur.execute('''DROP TABLE IF EXISTS orders CASCADE''')
         self.cur.execute('''DROP TABLE IF EXISTS users CASCADE''') 
         self.cur.execute('''DROP TABLE IF EXISTS menus CASCADE''')
-        
-   

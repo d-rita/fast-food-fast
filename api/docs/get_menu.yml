@@ -1,0 +1,9 @@
+Endpoint to Get menu.
+---
+tags:
+    - Fast Food Fast Menu
+responses:
+  200:
+    description: Menu successfully returned
+  404:
+    description: No menu found
