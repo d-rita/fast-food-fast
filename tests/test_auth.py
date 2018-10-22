@@ -1,5 +1,7 @@
-from tests.base_test import BaseTestCase
 from flask import json
+
+from tests.base_test import BaseTestCase
+
 
 class TestAuthAPIs(BaseTestCase):
     """
@@ -281,4 +283,3 @@ class TestAuthAPIs(BaseTestCase):
         content_type='application/json')
         self.assertEqual(response.status_code, 400)
         self.assertIn(b'Missing key parameter: username, password', response.data)
-        

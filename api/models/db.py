@@ -1,9 +1,9 @@
 """Database module"""
 import psycopg2
+
 from api import app
 
 conn = psycopg2.connect(dbname="fastfooddb", user="postgres", password="diana", host="localhost")
-test_conn = psycopg2.connect(database="testdb", user="postgres", password="diana", host="localhost")
 cur = conn.cursor()
 
 class DatabaseConnection:
@@ -28,5 +28,3 @@ class DatabaseConnection:
         self.cur.execute('''DROP TABLE IF EXISTS orders CASCADE''')
         self.cur.execute('''DROP TABLE IF EXISTS users CASCADE''') 
         self.cur.execute('''DROP TABLE IF EXISTS menus CASCADE''')
-        
-   

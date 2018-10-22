@@ -1,6 +1,8 @@
 """Menu module"""
-from api.models.db import DatabaseConnection
 from flask import jsonify
+
+from api.models.db import DatabaseConnection
+
 
 def get_food_by_id(menu_id):
     query = '''SELECT menu_id FROM menus WHERE menu_id = {}'''.format(menu_id)

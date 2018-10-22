@@ -1,9 +1,12 @@
 """Users module"""
-from api.models.db import DatabaseConnection
 import re
-from flask_jwt_extended import create_access_token
-from api import app
+
 from flask import jsonify
+from flask_jwt_extended import create_access_token
+
+from api import app
+from api.models.db import DatabaseConnection
+
 
 class Users:
     """Users class defining users methods and variables"""
@@ -55,9 +58,3 @@ class Users:
         if user_count > 0:
             return False
         return True
-        
-
-
-
-
-    

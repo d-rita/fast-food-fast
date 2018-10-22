@@ -1,6 +1,7 @@
 import datetime
 import re
 
+from flasgger import swag_from
 from flask import Blueprint, jsonify, make_response, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
@@ -21,6 +22,7 @@ def validate_user_string(string):
     return response
     
 @user_bp.route('/orders', methods=['GET'])
+@swag_from("..docs/get_user_orders.yml")
 @jwt_required
 def get_user_orders():
     """Get a particular user's orders"""
@@ -34,13 +36,14 @@ def get_user_orders():
     return jsonify({'message':'Log in to get your order history'}), 401
 
 @user_bp.route('/orders', methods=['POST'])
+@swag_from("..docs/add_order.yml")
 @jwt_required
 def add_one_user_order():
     """Place an order by user"""
     try:
         data = request.get_json()
         if not data:
-            return jsonify({'message': 'Data should be in JSON!'}), 400
+            return jsonify({'message': 'Data should be in JSON!'}), 400 
         logged_in = get_jwt_identity()
         user_id = logged_in['user_id']
         user_location = data['location']
