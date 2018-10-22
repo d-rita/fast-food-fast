@@ -43,7 +43,7 @@ def add_one_user_order():
     try:
         data = request.get_json()
         if not data:
-            return jsonify({'message': 'Data should be in JSON!'}), 400
+            return jsonify({'message': 'Data should be in JSON!'}), 400 
         logged_in = get_jwt_identity()
         user_id = logged_in['user_id']
         user_location = data['location']
