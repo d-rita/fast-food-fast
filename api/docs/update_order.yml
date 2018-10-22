@@ -1,0 +1,37 @@
+Endpoint to Update order status.
+---
+tags:
+    - Fast Food Order
+parameters:
+    - name: token
+      in: header
+      description: A json web token generated for each loggged in user
+      required: true
+      type: string
+
+    - in: path
+      name: order_id
+      description: Input order_id for order whose status is to be updated.
+      required: true
+      type: integer
+
+    - name: body
+      description: This contains details to update order status.
+      in: body
+      required: true
+responses:
+  200:
+    description: Order status successfully updated.
+  400:
+    description: Failed to update the order status
+  401:
+    description: Unauthorised access
+
+security:
+  - JWT:
+      description: Pass in jwt token. i.e Bearer <jwt>
+      type: apiKey
+      scheme: bearer
+      name: token
+      in: header
+      bearerFormat: JWT
