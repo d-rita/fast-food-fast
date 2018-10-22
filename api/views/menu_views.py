@@ -1,23 +1,25 @@
-from flask import jsonify, make_response, request, Blueprint
-from api.models.menu import Menu
-from flask_jwt_extended import jwt_required, get_jwt_identity
 import re
+
+from flasgger import swag_from
+from flask import Blueprint, jsonify, make_response, request
+from flask_jwt_extended import get_jwt_identity, jwt_required
 
 from api import app
 from api.models.db import DatabaseConnection
+from api.models.menu import Menu
 
 menu_bp = Blueprint('menu_bp', __name__)
 
 @menu_bp.route('/menu', methods=['GET'])
-@jwt_required
+@swag_from("..docs/get_menu.yml")
 def get_menu():
-    user = get_jwt_identity()
     my_menu = Menu.get_menu()  
     if my_menu == None:
         return make_response(jsonify({'message': 'There is no menu'}), 404) 
     return make_response(jsonify({'message':'Menu successfully returned', 'Menu': my_menu}), 200)
 
 @menu_bp.route('/menu', methods=['POST'])
+@swag_from("../docs/add_food.yml")
 @jwt_required
 def add_menu_option():  
     logged_in_admin = get_jwt_identity()
@@ -45,4 +47,3 @@ def add_menu_option():
         except KeyError:
             return jsonify({'message':'Fill in all parameters: name and price'}), 400
     return jsonify({'message':'Only admins allowed'}), 401
-    
