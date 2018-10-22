@@ -1,5 +1,7 @@
-from tests.base_test import BaseTestCase
 import json
+
+from tests.base_test import BaseTestCase
+
 
 class TestUsersAPIs(BaseTestCase):
 
