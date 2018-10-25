@@ -23,14 +23,14 @@
 
             </div>
             <div class="user_signup">
-                <form id="signup" method="POST">
+                <form id="signup" method="POST" action="user_login.html">
                     <fieldset>
                         <legend>Sign up here</legend>
 
-                        <input type="text" placeholder="Username">
-                        <input type="email" placeholder="Email Address">
-                        <input type="text" placeholder="New Password">
-                        <input type="checkbox" name="admin" value="admin"> Sign up as admin <br>
+                        <input type="text" placeholder="Username" id="username">
+                        <input type="email" placeholder="Email Address" id="email">
+                        <input type="text" placeholder="New Password" id="password">
+                        <input type="radio" id="admin">As admin<br>
                         <input type="submit" value="Create my account">
                         <br>
                         <p>Already have an account?<a href="user_login.html">Log in</a></p>
@@ -42,6 +42,7 @@
         <!--endof main-->
     </div>
     <!--endof container-->
+    <script src='scripts/signup.js'></script>
 
 </body>
 <footer>©Copyright of Fast-Food-Fast 2018. All rights reserved.</footer>
