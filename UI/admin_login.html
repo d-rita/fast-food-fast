@@ -19,15 +19,15 @@
         <!--endof header-->
         <div class="main">
             <div class="image">
-                <img src="subway.jpg" alt="subway" height="500" width="650">
+                <img src="images/subway.jpg" alt="subway" height="500" width="650">
             </div>
             <!--endof image-->
             <div class="admin_login">
-                <form action="admin_dashboard.html" id="admin">
+                <form method="POST" action="admin_dashboard.html" id="admin_login">
                     <fieldset>
                         <legend>Admin Log In</legend>
-                        <input type="text" placeholder="Username">
-                        <input type="text" placeholder="Password">
+                        <input type="text" id="username" placeholder="Username">
+                        <input type="text" id="password" placeholder="Password">
                         <a href="admin_dashboard.html"><button class="login">Log in</button></a>
                     </fieldset>
                 </form>
@@ -37,6 +37,7 @@
         <!--endof main-->
     </div>
     <!--endof container-->
+    <script src="scripts/admin_login.js"></script>
 </body>
 <footer>©Copyright of Fast-Food-Fast 2018. All rights reserved.</footer>
 

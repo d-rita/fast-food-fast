@@ -1,5 +1,0 @@
-app/
-.vscode/
-.pytest_cache/
-tests/
-venv/
