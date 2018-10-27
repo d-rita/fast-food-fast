@@ -7,14 +7,14 @@ function registerUser(e) {
     let username = document.getElementById('username').value;
     let email = document.getElementById('email').value;
     let password = document.getElementById('password').value;
-    let adminRadio = document.getElementById('admin').checked;
-    console.log(adminRadio);
+    let adminCheck = document.getElementById('admin').checked;
+    console.log(adminCheck);
 
     let newUser = {
         username: username,
         email: email,
         password: password,
-        admin: adminRadio
+        admin: adminCheck
     }
 
     fetch(url, {
@@ -25,12 +25,11 @@ function registerUser(e) {
         })
         .then(response => response.json())
         .then(res => {
-            console.log(res.token);
-            if (res.message === 201) {
-                alert(`You can now sign in as ${newUser['username']}`);
+            if (res.message === 'New user added') {
+                alert('You can now sign in');
                 window.location.replace('user_login.html');
             } else {
-                alert('Failed to sign up')
+                alert(res.message)
             }
         })
         .catch(err => console.log(err))
