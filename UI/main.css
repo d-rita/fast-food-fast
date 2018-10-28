@@ -4,6 +4,10 @@
     text-decoration: none;
 }
 
+.link {
+    color: #d68812;
+}
+
 .header {
     background-color: #e68a00;
     padding: 2px;
