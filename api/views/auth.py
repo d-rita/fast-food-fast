@@ -55,6 +55,11 @@ def login():
             return jsonify({'message': 'Please enter your password'}), 400
         user_token = Users.check_user_credentials(username, password)
         if user_token is not None:
+            is_admin = Users.check_logged_in_as(username, password)
+            if is_admin[0] == True:
+                return jsonify({'message':'Logged in as admin', 'token': user_token}), 200
+            elif is_admin[0] == False:
+                return jsonify({'message':'Logged in as client', 'token': user_token}), 200
             return jsonify({'message':'Successfully logged in', 'token': user_token}), 200
         return jsonify({'message':'User must sign up before logging in'}), 400  
     except KeyError:

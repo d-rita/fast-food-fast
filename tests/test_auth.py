@@ -159,8 +159,8 @@ class TestAuthAPIs(BaseTestCase):
         self.assertEqual(response.status_code, 400)
         self.assertIn(b'Data should be in JSON format', response.data)
 
-    def test_can_login_user(self):
-        """Test if a user can successfully be logged in"""
+    def test_can_login_admin(self):
+        """Test if an admin can successfully be logged in"""
         self.client.post('api/v1/auth/signup', 
         data=json.dumps(dict(
             username="Rita",
@@ -178,8 +178,28 @@ class TestAuthAPIs(BaseTestCase):
         ),
         content_type='application/json')
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Successfully logged in', response.data)
+        self.assertIn(b'Logged in as admin', response.data)
 
+    def test_can_login_user(self):
+        """Test if a user can successfully be logged in"""
+        self.client.post('api/v1/auth/signup', 
+        data=json.dumps(dict(
+            username="Rita",
+            password="hedwig",
+            email="rita@gmail.com", 
+            admin=False
+        )),
+        content_type='application/json')
+
+        response =  self.client.post('api/v1/auth/login', 
+        data=json.dumps(dict(
+            username="Rita", 
+            password="hedwig"
+            )
+        ),
+        content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Logged in as client', response.data)
 
     def test_invalid_user_login(self):
         """Tests for non signed up user logging in"""

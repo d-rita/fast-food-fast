@@ -29,7 +29,6 @@ class Users:
 
     @classmethod
     def check_user_credentials(cls, username, password):
-        response = ''
         query = '''SELECT * FROM users WHERE username = %s AND user_password = %s'''
         my_db = DatabaseConnection()
         my_db.cur.execute(query, (username, password))
@@ -58,3 +57,11 @@ class Users:
         if user_count > 0:
             return False
         return True
+
+    @classmethod
+    def check_logged_in_as(cls, username, password):
+        query = '''SELECT admin FROM users WHERE username = %s AND user_password = %s'''
+        my_db = DatabaseConnection()
+        my_db.cur.execute(query, (username, password))
+        result = my_db.cur.fetchone()
+        return result
