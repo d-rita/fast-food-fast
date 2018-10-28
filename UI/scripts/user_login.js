@@ -20,14 +20,18 @@ function userLogin(e) {
         })
         .then(res => res.json())
         .then(response => {
-            if (response.status === 200) {
+            if (response.message === 'Logged in as client') {
                 token = response.token
                 localStorage.setItem('token', token);
                 alert(`Welcome ${User['username']}`);
-                console.log(localStorage.getItem('token'))
                 window.location.replace('user_dashboard.html')
+            } else if (response.message === 'Logged in as admin') {
+                token = response.token
+                localStorage.setItem('token', token);
+                alert(`Welcome ${User['username']}`);
+                window.location.replace('admin_dashboard.html')
             } else {
-                alert(response.message);
+                alert(response.message)
             }
         })
         .catch(err => console.log(err))

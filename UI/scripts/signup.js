@@ -26,7 +26,7 @@ function registerUser(e) {
         .then(response => response.json())
         .then(res => {
             if (res.message === 'New user added') {
-                alert('You can now sign in');
+                alert(`You can now sign in as ${User['username']}`);
                 window.location.replace('user_login.html');
             } else {
                 alert(res.message)
