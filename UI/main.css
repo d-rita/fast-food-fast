@@ -81,7 +81,7 @@ legend {
 
 /*home.html*/
 
-.menu {
+#menu-items {
     margin: 0 auto;
 }
 
@@ -159,7 +159,7 @@ button {
     padding: 40px;
 }
 
-.orders {
+#menus {
     margin-left: 250px;
 }
 
