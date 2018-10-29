@@ -46,7 +46,7 @@ function getMenu() {
         .then(res => {
             console.log(res)
             output = ''
-            if (res.message === '') {
+            if (res.message === 'Menu successfully returned') {
                 output = `
                 <tr>
                     <th>Food_ID</th>
@@ -54,12 +54,14 @@ function getMenu() {
                     <th>Price</th>
                 </tr>
                 `
-                for (let x in res) {
+                let myMenu = res.Menu
+                for (let x in myMenu) {
                     output = `
                     <tr>
-                        <td>${res[x].menu_id}</td>
-                        <td>${res[x].food_name}</td>
-                        <td>${res[x].food_price}</td>
+                        <td>${myMenu[x].menu_id}</td>
+                        <td>${myMenu[x].food_name}</td>
+                        <td>${myMenu[x].food_price}</td>
+                        <td><button id="add-btn" value="${myMenu[x].menu_id}" onClick="selectFood()">Add</button>
                     </tr>`;
                     document.getElementById('menu-items').innerHTML = output;
                 }
@@ -70,4 +72,47 @@ function getMenu() {
         })
         .catch(err => console.log(err))
 
+}
+
+function selectFood() {
+    let myFood = document.getElementById('add-btn').value
+    document.getElementById('food_id').innerHTML = myFood;
+}
+
+document.getElementById('payform').addEventListener('submit', addOrder);
+let orderUrl = 'https://diana-fast-food-fast.herokuapp.com/api/v1/user/order';
+
+function addOrder(e) {
+    e.preventDefault();
+
+    let foodId = document.getElementById('food_id').value;
+    let location = document.getElementById('location').value;
+
+    let newOrder = {
+        food_id: foodId,
+        location: location
+    }
+
+    fetch(orderUrl, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${token}` },
+            mode: "cors",
+            body: JSON.stringify(newOrder)
+        })
+        .then(res => res.json())
+        .then(response => {
+            output = ` 
+            <table>
+                <tr>
+                    <th colspan="2">My order</th>
+                </tr>
+                <tr>
+                    <td>${newOrder['food_id']}</td>
+                    <td>${newOrder['location']}</td>
+                </tr>
+            </table> `;
+            document.getElementsByClassName('checkout').innerHTML = output;
+            alert('You have made one new order');
+        })
+        .catch(err => console.log(err))
 }
