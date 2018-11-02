@@ -9,19 +9,7 @@ test_db = DatabaseConnection()
 class TestMenusAPIs(BaseTestCase):
     """This class contains tests for the menus API endpoints"""
 
-    def test_add_food_not_json_data(self):
-        """Tests that food can be added by admin"""
-        resp1 = self.client.post('/api/v1/menu',
-            headers=dict(Authorization='Bearer ' + self.login_admin()),
-            data=json.dumps(dict(
-                name='Burger',
-                price=12000
-            )
-        ),
-        content_type='HTML')
-        self.assertEqual(resp1.status_code, 400)
-        self.assertIn(b'Data should be in json format!', resp1.data)
-
+   
     def test_add_food_non_admin(self):
         """Tests that food cannot be added by non admin"""
         resp1 = self.client.post('/api/v1/menu',

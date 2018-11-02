@@ -6,11 +6,14 @@ function addFood(e) {
     e.preventDefault();
 
     let food_name = document.getElementById('food_name').value;
+    console.log(food_name)
     let price = document.getElementById('price').value;
+    console.log(price)
 
-    let formData = new FormData();
+    let formData = new FormData('add-food');
     formData.append('name', food_name);
     formData.append('price', price);
+    console.log(formData)
 
 
     fetch(url, {
@@ -18,20 +21,21 @@ function addFood(e) {
             headers: { 'Authorization': `Bearer ${token}` },
             mode: "cors",
             body: formData
+                // body: JSON.stringify(body)
         })
         .then(response => response.json())
         .then(res => {
-            output = ''
-            output = `
+            let output = `
               <tr>
                 <td>${formData['name']}</td>
                <td>${formData['price']}</td>
             </tr>`;
-            document.getElementById('menus').innerHTML = output;
             console.log(res.message)
             if (res.message === 'Food successfully added!') {
-                alert(`You have added ${newFood['name']} to the menu`);
+                alert(`You have added ${body['name']} to the menu`);
+                document.getElementById('menus').innerHTML = output;
             } else {
+                alert(res.message)
                 console.log(res.message)
             }
 

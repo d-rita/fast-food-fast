@@ -26,8 +26,6 @@ def add_menu_option():
     if logged_in_admin['admin'] == True:
         try:
             data = request.get_json()
-            if not data:
-                return jsonify({'message': 'Data should be in json format!'}), 400
             food_name = data['name']
             food_price = data['price']
             if not food_name:
