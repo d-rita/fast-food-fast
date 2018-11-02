@@ -1,0 +1,17 @@
+Endpoint to login a user
+---
+tags:
+  - Fast Food Fast User
+parameters:
+  - name: body
+    description: This contains user login details
+    in: body
+    required: true
+
+responses:
+  200:
+    description: User successfully logged in
+    
+  400:
+    description: User failed to log in
+   

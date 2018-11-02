@@ -1,0 +1,27 @@
+Endpoint to Get all orders.
+---
+tags:
+    - Fast Food Fast Orders
+parameters:
+    - name: token
+      in: header
+      description: A json web token generated for each loggged in user
+      required: true
+      type: string
+
+responses:
+  200:
+    description: All orders successfully returned
+  404:
+    description: No orders found
+  401:
+    description: Unauthorised access by non admin
+
+security:
+  - JWT:
+      description: Pass in jwt token. i.e Bearer <jwt>
+      type: apiKey
+      scheme: bearer
+      name: token
+      in: header
+      bearerFormat: JWT
