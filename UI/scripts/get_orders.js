@@ -10,7 +10,8 @@ function getAllOrders() {
         })
         .then(response => response.json())
         .then(res => {
-            let orders = `
+            if (res.message === 'All orders are returned!') {
+                let orders = `
         <tr class="order-list">
             <th>Order_ID.</th>
             <th>Food_ID</th>
@@ -19,9 +20,9 @@ function getAllOrders() {
             <th>Location</th>
             <th>Order Status</th>
         </tr>`
-            for (let i in res) {
-                console.log(res[i].item);
-                output += `
+                for (let i in res) {
+                    console.log(res[i].item);
+                    orders += `
             <tr class="order">
                 <td>${res[i].order_id}</td>
                 <td>${res[i].menu_id}</td>
@@ -31,7 +32,15 @@ function getAllOrders() {
                 <td>${res[i].order_status}</td>
                
             </tr>`;
+                    document.getElementById('order-list').innerHTML = orders;
+                }
+
+            } else {
+                alert(res.message)
+                let noOrders = `<p>${res.message}</p>`
+                document.getElementById('order-list').innerHTML = noOrders;
             }
-            document.getElementById('order-list').innerHTML = orders;
+
         })
+        .catch(err => console.log(err))
 }
