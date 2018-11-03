@@ -43,23 +43,21 @@ def sign_up():
 @auth_bp.route('/login', methods=['POST'])
 @swag_from("..docs/login.yml")
 def login():
-    try: 
-        data = request.get_json()
-        if not data:
-            return jsonify({'message': 'Data should be in JSON format!'}), 400
-        username = data['username']
-        password = data['password']
-        if not username:
-            return jsonify({'message': 'Please enter your username'}), 400
-        elif not password:
-            return jsonify({'message': 'Please enter your password'}), 400
-        user_token = Users.check_user_credentials(username, password)
-        if user_token is not None:
-            is_admin = Users.check_logged_in_as(username, password)
-            if is_admin[0] == True:
-                return jsonify({'message':'Logged in as admin', 'token': user_token}), 200
-            elif is_admin[0] == False:
-                return jsonify({'message':'Logged in as client', 'token': user_token}), 200
-        return jsonify({'message':'User must sign up before logging in'}), 400  
-    except KeyError:
-        return jsonify({'message': 'Missing key parameter: username, password, admin'}), 400
+    data = request.get_json()
+    if not data:
+        return jsonify({'message': 'Data should be in JSON format!'}), 400
+    username = data['username']
+    password = data['password']
+    if not username:
+        return jsonify({'message': 'Please enter your username'}), 400
+    elif not password:
+        return jsonify({'message': 'Please enter your password'}), 400
+    user_token = Users.check_user_credentials(username, password)
+    if user_token is not None:
+        is_admin = Users.check_logged_in_as(username, password)
+        if is_admin[0] == True:
+            return jsonify({'message':'Logged in as admin', 'token': user_token}), 200
+        elif is_admin[0] == False:
+            return jsonify({'message':'Logged in as client', 'token': user_token}), 200
+    return jsonify({'message':'User must sign up before logging in'}), 400  
+    
