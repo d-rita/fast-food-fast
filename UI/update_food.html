@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <a href="admin_dashboard.html">Fast-Food-Fast</a></h1>
+        </div>
+        <!--endof header-->
+        <div class="nav">
+            <ul>
+                <li><a href="admin_dashboard.html">List of Orders</a></li>
+                <li><a href="update_food.html">Update Menu</a></li>
+                <li><a href="user_login.html">Log Out</a></li>
+            </ul>
+        </div>
+        <!--endof nav-->
+
+        <div class="main">
+            <div class="food">
+                <form id="add-food">
+                    <b>Add Available Food</b><br>
+                    <input type="text" id="food_name" placeholder="Enter Food Details">
+                    <input type="text" id="price" placeholder="Price">
+                    <input type="submit" value="Add food"> </form>
+
+            </div>
+            <!--endof food div-->
+            <div id="menus">
+                <!--  <table>
+                    <tr>
+                        <th><b>Food</b></th>
+                        <th><b>Price</b></th>
+                        <th colspan="2"><b>Action</b></th>
+                    </tr>
+                    <tr>
+
+                        <td>Veggie Burger</td>
+                        <td>12,000</td>
+                        <td><input type="button" value="Delete"></td>
+                        <td>
+                            <a href="edit.html"><input type="button" value="Edit"></a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Chicken Burger</td>
+                        <td>12,000</td>
+                        <td><input type="button" value="Delete"></td>
+                        <td>
+                            <a href="edit.html"><input type="button" value="Edit"></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Beef Burger</td>
+                        <td>12,000</td>
+                        <td><input type="button" value="Delete"></td>
+                        <td>
+                            <a href="edit.html"><input type="button" value="Edit"></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Veggie Burger</td>
+                        <td>12,000</td>
+                        <td><input type="button" value="Delete"></td>
+                        <td>
+                            <a href="edit.html"><input type="button" value="Edit"></a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ham Burger</td>
+                        <td>12,000</td>
+                        <td><input type="button" value="Delete"></td>
+                        <td>
+                            <a href="edit.html"><input type="button" value="Edit"></a>
+                        </td>
+                    </tr>
+
+                </table> -->
+            </div>
+            <!--endof orders-->
+
+
+        </div>
+        <!--endof main-->
+    </div>
+    <!--endof container-->
+    <script src="scripts/add_food.js"></script>
+
+</body>
+<footer>©Copyright of Fast-Food-Fast 2018. All rights reserved.</footer>
+
+</html>

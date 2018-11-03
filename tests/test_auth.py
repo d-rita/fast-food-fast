@@ -166,7 +166,7 @@ class TestAuthAPIs(BaseTestCase):
             username="Rita",
             password="hedwig",
             email="rita@gmail.com", 
-            admin=True
+            admin=False
         )),
         content_type='application/json')
 
@@ -200,7 +200,6 @@ class TestAuthAPIs(BaseTestCase):
         content_type='application/json')
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Logged in as client', response.data)
-
 
     def test_invalid_user_login(self):
         """Tests for non signed up user logging in"""

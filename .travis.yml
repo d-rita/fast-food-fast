@@ -10,7 +10,8 @@ install:
   - pip install -r requirements.txt
 
 before_script:
-  - "psql -c 'create database fastfooddb;' -U postgres"
+  - "psql -c 'create database d44f6hfmbs0tfq;' -U postgres"
+
 
 script:
   - pytest tests --cov=api 

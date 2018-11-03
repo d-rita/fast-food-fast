@@ -91,4 +91,3 @@ To get coverage report of tests, run:
 ```
 pytest tests --cov=api
 ```
-

@@ -5,7 +5,8 @@ from config import DevelopmentConfig
 
 app.config.from_object(DevelopmentConfig)
 
+db_conn = DatabaseConnection()
+db_conn.create_all_tables()
+
 if __name__=='__main__':
-    db_conn = DatabaseConnection()
-    db_conn.create_all_tables()
     app.run()
