@@ -109,18 +109,6 @@ class TestMenusAPIs(BaseTestCase):
         self.assertEqual(resp1.status_code, 400)
         self.assertIn(b'Fill in food price', resp1.data)
 
-    def test_cannot_add_food_missing_parameter(self):
-        """Tests that food cannot be added with missing parameter"""
-        resp1 = self.client.post('/api/v1/menu',
-            headers=dict(Authorization='Bearer ' + self.login_admin()),
-            data=json.dumps(dict(
-                name='Burger'
-            )
-        ),
-        content_type='application/json')
-        self.assertEqual(resp1.status_code, 400)
-        self.assertIn(b'Fill in all parameters: name and price', resp1.data)
-
     def test_return_menu(self):
         self.client.post('/api/v1/menu',
             headers=dict(Authorization='Bearer ' + self.login_admin()),
