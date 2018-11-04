@@ -20,7 +20,7 @@ class TestUsersAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -28,7 +28,7 @@ class TestUsersAPIs(BaseTestCase):
         headers=dict(Authorization='Bearer '+ self.login_user()),
         data=json.dumps(dict(
                 location='Bunga',
-                food_id=1
+                food_id='1'
         )),
         content_type='application/json')
         self.assertEqual(response1.status_code, 201)
@@ -40,7 +40,7 @@ class TestUsersAPIs(BaseTestCase):
         headers=dict(Authorization='Bearer '+ self.login_user()),
         data=json.dumps(dict(
                 location='Bunga',
-                food_id=101
+                food_id='101'
         )),
         content_type='application/json')
         self.assertEqual(response1.status_code, 404)
@@ -52,7 +52,7 @@ class TestUsersAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -72,7 +72,7 @@ class TestUsersAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -84,7 +84,7 @@ class TestUsersAPIs(BaseTestCase):
         )),
         content_type='application/json')
         self.assertEqual(response1.status_code, 400)
-        self.assertIn(b'Id must be an integer', response1.data)
+        self.assertIn(b'Food id must be an integer', response1.data)
 
     def test_user_cannot_add_order_with_empty_location(self):
         """Test that user cannot place an order without location"""
@@ -92,7 +92,7 @@ class TestUsersAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -113,7 +113,7 @@ class TestUsersAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -121,7 +121,7 @@ class TestUsersAPIs(BaseTestCase):
         headers=dict(Authorization='Bearer '+ self.login_user()),
         data=json.dumps(dict(
                 location=2345,
-                food_id=1        )),
+                food_id='1'        )),
         content_type='application/json')
         self.assertEqual(response1.status_code, 400)
         self.assertIn(b'Invalid location', response1.data)
@@ -132,14 +132,14 @@ class TestUsersAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
         response1 = self.client.post('/api/v1/users/orders',
         headers=dict(Authorization='Bearer '+ self.login_user()),
         data=json.dumps(dict(
-                food_id=1        )),
+                food_id='1'        )),
         content_type='application/json')
         self.assertEqual(response1.status_code, 400)
         self.assertIn(b'Missing parameter: fill in location and food_id', response1.data)
@@ -150,7 +150,7 @@ class TestUsersAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -158,7 +158,7 @@ class TestUsersAPIs(BaseTestCase):
         headers=dict(Authorization='Bearer '+ self.login_user()),
         data=json.dumps(dict(
                 location='Bunga',
-                food_id=1
+                food_id='1'
         )),
         content_type='application/json')
         response = self.client.get('api/v1/users/orders', 

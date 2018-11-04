@@ -32,7 +32,7 @@ def get_user_orders():
         my_orders = Orders.get_user_orders(user_id)
         if len(my_orders)==0:
             return jsonify({'message': 'You have no order history!'}), 404
-        return jsonify({'message':'Your order history has been returned', 'Your orders':my_orders}), 200
+        return jsonify({'message':'Your order history has been returned', 'Orders':my_orders}), 200
     return jsonify({'message':'Log in to get your order history'}), 401
 
 @user_bp.route('/orders', methods=['POST'])
@@ -54,8 +54,8 @@ def add_one_user_order():
             return jsonify({'message': 'Fill in the menu_id'}), 400
         elif not user_location:
             return jsonify({'message': 'Fill in the location'}), 400
-        elif not isinstance(food_id, int):
-            return jsonify({'message': 'Id must be an integer' }), 400
+        elif not re.search(r'^[0-9]+$', food_id):
+            return jsonify({'message': 'Food id must be an integer'}), 400
         menu_id = get_food_by_id(food_id)
         if menu_id is None:
             return jsonify({'message':'Food is not on the menu'}), 404

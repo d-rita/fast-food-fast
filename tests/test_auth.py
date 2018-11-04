@@ -166,7 +166,7 @@ class TestAuthAPIs(BaseTestCase):
             username="Rita",
             password="hedwig",
             email="rita@gmail.com", 
-            admin=False
+            admin=True
         )),
         content_type='application/json')
 

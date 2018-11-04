@@ -47,7 +47,7 @@ class TestOrdersAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -55,14 +55,14 @@ class TestOrdersAPIs(BaseTestCase):
         headers=dict(Authorization='Bearer '+ self.login_user()),
         data=json.dumps(dict(
                 location='Bunga',
-                food_id=1
+                food_id='1'
         )),
         content_type='application/json')
         self.client.post('/api/v1/users/orders',
         headers=dict(Authorization='Bearer '+ self.login_user()),
         data=json.dumps(dict(
                 location='Kamwokya',
-                food_id=1
+                food_id='1'
         )),
         content_type='application/json')
         response = self.client.get('/api/v1/orders',
@@ -77,7 +77,7 @@ class TestOrdersAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -85,7 +85,7 @@ class TestOrdersAPIs(BaseTestCase):
         headers=dict(Authorization='Bearer '+ self.login_user()),
         data=json.dumps(dict(
                 location='Bunga',
-                food_id=1
+                food_id='1'
         )),
         content_type='application/json')
         response = self.client.get('/api/v1/orders/1',
@@ -100,7 +100,7 @@ class TestOrdersAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -108,7 +108,7 @@ class TestOrdersAPIs(BaseTestCase):
         headers=dict(Authorization='Bearer '+ self.login_user()),
         data=json.dumps(dict(
                 location='Bunga',
-                food_id=1
+                food_id='1'
         )),
         content_type='application/json')
         response = self.client.put('/api/v1/orders/1',
@@ -126,7 +126,7 @@ class TestOrdersAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -134,7 +134,7 @@ class TestOrdersAPIs(BaseTestCase):
         headers=dict(Authorization='Bearer '+ self.login_user()),
         data=json.dumps(dict(
                 location='Bunga',
-                food_id=1
+                food_id='1'
         )),
         content_type='application/json')
         response = self.client.put('/api/v1/orders/1',

@@ -25,6 +25,8 @@ def add_menu_option():
     logged_in_admin = get_jwt_identity()
     if logged_in_admin['admin'] == True:
         data = request.get_json()
+        if not data:
+            return jsonify({'message': 'Data should be in json format'})
         food_name = data['name']
         food_price = data['price']
         if not food_name:
@@ -33,8 +35,8 @@ def add_menu_option():
             return jsonify({'message':'Fill in food price'}), 400
         elif not isinstance(food_name, str) or not re.search(r'^[a-zA-Z]+$', food_name):
             return jsonify({'message': 'Please enter letters only'}), 400
-        elif not isinstance(food_price, int):
-            return jsonify({'message': 'Please enter numbers only'}), 400
+        elif not re.search(r'^[0-9]*[0-9]*[0-9]*[0-9]*[0-9]$', food_price):
+            return jsonify({'message':'Please enter valid price figure'}), 400
         new_food = Menu.check_if_food_is_new(food_name, food_price)
         if new_food == True:
             food = Menu(f_name=food_name, f_price=food_price)

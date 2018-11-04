@@ -16,7 +16,7 @@ class TestMenusAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_user()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -29,7 +29,7 @@ class TestMenusAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -42,7 +42,7 @@ class TestMenusAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -50,7 +50,7 @@ class TestMenusAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -63,7 +63,7 @@ class TestMenusAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -76,14 +76,14 @@ class TestMenusAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name=12345,
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
         self.assertEqual(resp1.status_code, 400)
         self.assertIn(b'Please enter letters only', resp1.data)
 
-    def test_cannot_add_food_invalid_prcie(self):
+    def test_cannot_add_food_invalid_price(self):
         """Tests that food cannot be added with invalid food price"""
         resp1 = self.client.post('/api/v1/menu',
             headers=dict(Authorization='Bearer ' + self.login_admin()),
@@ -94,7 +94,7 @@ class TestMenusAPIs(BaseTestCase):
         ),
         content_type='application/json')
         self.assertEqual(resp1.status_code, 400)
-        self.assertIn(b'Please enter numbers only', resp1.data)
+        self.assertIn(b'Please enter valid price figure', resp1.data)
 
     def test_cannot_add_food_empty_price(self):
         """Tests that food cannot be added without price"""
@@ -114,7 +114,7 @@ class TestMenusAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Burger',
-                price=12000
+                price='12000'
             )
         ),
         content_type='application/json')
@@ -122,7 +122,7 @@ class TestMenusAPIs(BaseTestCase):
             headers=dict(Authorization='Bearer ' + self.login_admin()),
             data=json.dumps(dict(
                 name='Braai',
-                price=20000
+                price='20000'
             )
         ),
         content_type='application/json')
