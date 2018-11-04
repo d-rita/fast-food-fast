@@ -45,3 +45,42 @@ function addFood(e) {
         .catch(err => console.log(err))
 
 }
+
+let menuUrl = 'http://127.0.0.1:5000/api/v1/menu';
+document.getElementById('menus').addEventListener('load', getMenu());
+
+function getMenu() {
+    fetch(menuUrl)
+        .then(response => response.json())
+        .then(res => {
+            console.log(res)
+            console.log(res.message)
+            let menus = ''
+            if (res.message === 'Menu successfully returned') {
+                myMenu = res.Menu
+                console.log(myMenu)
+                for (let x in myMenu) {
+                    menus += `
+                    <table>
+                    <tr>
+                        <th>Food</th>
+                        <th>Price</th>
+                    </tr>
+                        <tr>
+                        <td>${myMenu[x].menu_id}</td>
+                            <td>${myMenu[x].food_name}</td>
+                            <td>${myMenu[x].food_price}</td>
+                        </tr>
+                    </table> `;
+                }
+                document.getElementById('menus').innerHTML = menus;
+
+
+            } else if (res.message === 'There is no menu') {
+                let noMenus = `<p>There is no menu available<p>`
+                document.getElementById('menus').innerHTML = noMenus;
+            }
+        })
+        .catch(err => console.log(err))
+
+}
