@@ -54,8 +54,8 @@ def add_one_user_order():
             return jsonify({'message': 'Fill in the menu_id'}), 400
         elif not user_location:
             return jsonify({'message': 'Fill in the location'}), 400
-        elif not re.search(r'^[0-9]+$', food_id):
-            return jsonify({'message': 'Food id must be an integer'}), 400
+        # elif not re.search(r'^[0-9]+$', food_id):
+        #     return jsonify({'message': 'Food id must be an integer'}), 400
         menu_id = get_food_by_id(food_id)
         if menu_id is None:
             return jsonify({'message':'Food is not on the menu'}), 404

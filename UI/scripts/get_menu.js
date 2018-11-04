@@ -13,22 +13,25 @@ function getMenu() {
                 console.log(myMenu)
                 for (let x in myMenu) {
                     console.log(myMenu[x])
+                    menu_id = myMenu[x].menu_id
+                    console.log(menu_id)
+                    localStorage.setItem('menu_id', menu_id)
                     menus += `
                     <table>
                     <tr>
-                        <th>Food_ID</th>
                         <th>Food</th>
                         <th>Price</th>
                     </tr>
                         <tr>
-                            <td>${myMenu[x].menu_id}</td>
                             <td>${myMenu[x].food_name}</td>
                             <td>${myMenu[x].food_price}</td>
-                            <td><button  id="add-btn" value="${myMenu[x].menu_id}" onClick="selectFood()">Add</button>
+                            <td><button  id="add-btn" value="${myMenu[x].menu_id}" onClick="alert('You have selected ${myMenu[x].food_name}')">Add</button>
                         </tr>
                     </table> `;
-                    document.getElementById('menu-items').innerHTML = menus;
                 }
+                document.getElementById('menu-items').innerHTML = menus;
+
+
             } else if (res.message === 'There is no menu') {
                 let noMenus = `<p>There is no menu available<p>`
                 document.getElementById('menu-items').innerHTML = noMenus;
@@ -38,7 +41,8 @@ function getMenu() {
 
 }
 
-function selectFood() {
-    let myFood = document.getElementById('add-btn').value
-    document.getElementById('food_id').innerHTML = myFood;
-}
+// function selectFood() {
+//     myFood = document.getElementById('add-btn').value;
+//     console.log(myFood)
+//     document.getElementById('food_id').innerHTML = myFood;
+// }

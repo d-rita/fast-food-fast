@@ -66,25 +66,25 @@ class TestUsersAPIs(BaseTestCase):
         self.assertEqual(response1.status_code, 400)
         self.assertIn(b'Fill in the menu_id', response1.data)
 
-    def test_user_cannot_add_order_with_invalid_food_id(self):
-        """Test that user cannot place an order without food"""
-        self.client.post('/api/v1/menu',
-            headers=dict(Authorization='Bearer ' + self.login_admin()),
-            data=json.dumps(dict(
-                name='Burger',
-                price='12000'
-            )
-        ),
-        content_type='application/json')
-        response1 = self.client.post('/api/v1/users/orders',
-        headers=dict(Authorization='Bearer '+ self.login_user()),
-        data=json.dumps(dict(
-                location='Bunga',
-                food_id='two'
-        )),
-        content_type='application/json')
-        self.assertEqual(response1.status_code, 400)
-        self.assertIn(b'Food id must be an integer', response1.data)
+    # def test_user_cannot_add_order_with_invalid_food_id(self):
+    #     """Test that user cannot place an order without food"""
+    #     self.client.post('/api/v1/menu',
+    #         headers=dict(Authorization='Bearer ' + self.login_admin()),
+    #         data=json.dumps(dict(
+    #             name='Burger',
+    #             price='12000'
+    #         )
+    #     ),
+    #     content_type='application/json')
+    #     response1 = self.client.post('/api/v1/users/orders',
+    #     headers=dict(Authorization='Bearer '+ self.login_user()),
+    #     data=json.dumps(dict(
+    #             location='Bunga',
+    #             food_id='two'
+    #     )),
+    #     content_type='application/json')
+    #     self.assertEqual(response1.status_code, 400)
+    #     self.assertIn(b'Food id must be an integer', response1.data)
 
     def test_user_cannot_add_order_with_empty_location(self):
         """Test that user cannot place an order without location"""
