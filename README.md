@@ -10,9 +10,7 @@
 Fast-Food-Fast is a delivery service for a restaurant. 
 
 
-**UI**
-
-The UI is hosted on Github pages at https://d-rita.github.io/fast-food-fast/UI/user_signup.html
+This app is currently hosted on Github pages at https://d-rita.github.io/fast-food-fast/UI/user_signup.html
 
 **Getting Started**
 
