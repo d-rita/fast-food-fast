@@ -1,4 +1,4 @@
-let url = 'https://diana-fast-food-fast.herokuapp.com/api/v1/orders';
+let url = 'http://127.0.0.1:5000/api/v1/orders';
 document.getElementById('order-list').addEventListener('load', getAllOrders());
 
 function getAllOrders() {
@@ -10,28 +10,30 @@ function getAllOrders() {
         })
         .then(response => response.json())
         .then(res => {
+            let orders = ''
             if (res.message === 'All orders are returned!') {
-                let orders = `
-        <tr class="order-list">
-            <th>Order_ID.</th>
-            <th>Food_ID</th>
+                allOrders = res.Orders
+                for (let i in allOrders) {
+                    console.log(allOrders[i])
+                    orders += `
+                    <table>
+        <tr>
+            <th>Order(Id)</th>
+            <th>Food(Id)</th>
             <th>Date</th>
-            <th>User_ID</th>
+            <th>User(Id)</th>
             <th>Location</th>
             <th>Order Status</th>
-        </tr>`
-                for (let i in res) {
-                    console.log(res[i].item);
-                    orders += `
-            <tr class="order">
-                <td>${res[i].order_id}</td>
-                <td>${res[i].menu_id}</td>
-                <td>${res[i].date}</td>
-                <td>${res[i].user_id}</td>
-                <td>${res[i]._location}</td>
-                <td>${res[i].order_status}</td>
-               
-            </tr>`;
+        </tr> 
+        <tr>
+            <td>${allOrders[i].order_id}</td>
+            <td>${allOrders[i].menu_id}</td>
+            <td>${allOrders[i].date}</td>
+            <td>${allOrders[i].user_id}</td>
+            <td>${allOrders[i].location}</td>
+            <td>${allOrders[i].status}</td>
+        </tr>
+        </table>`;
                     document.getElementById('order-list').innerHTML = orders;
                 }
 

@@ -1,4 +1,4 @@
-let url = 'https://diana-fast-food-fast.herokuapp.com/api/v1/menu';
+let url = 'http://127.0.0.1:5000/api/v1/menu';
 document.getElementById('menu-items').addEventListener('load', getMenu());
 
 function getMenu() {
@@ -7,22 +7,26 @@ function getMenu() {
         .then(res => {
             console.log(res)
             console.log(res.message)
+            let menus = ''
             if (res.message === 'Menu successfully returned') {
-                let menus = `
-                <tr>
-                    <th>Food_ID</th>
-                    <th>Food</th>
-                    <th>Price</th>
-                </tr>
-                `
-                for (let x in res) {
-                    menus = `
+                myMenu = res.Menu
+                console.log(myMenu)
+                for (let x in myMenu) {
+                    console.log(myMenu[x])
+                    menus += `
+                    <table>
                     <tr>
-                        <td>${res[x].menu_id}</td>
-                        <td>${res[x].food_name}</td>
-                        <td>${res[x].food_price}</td>
-                        <td><button id="add-btn" value="${res[x].menu_id}" onClick="selectFood()">Add</button>
-                    </tr>`;
+                        <th>Food_ID</th>
+                        <th>Food</th>
+                        <th>Price</th>
+                    </tr>
+                        <tr>
+                            <td>${myMenu[x].menu_id}</td>
+                            <td>${myMenu[x].food_name}</td>
+                            <td>${myMenu[x].food_price}</td>
+                            <td><button  id="add-btn" value="${myMenu[x].menu_id}" onClick="selectFood()">Add</button>
+                        </tr>
+                    </table> `;
                     document.getElementById('menu-items').innerHTML = menus;
                 }
             } else if (res.message === 'There is no menu') {
