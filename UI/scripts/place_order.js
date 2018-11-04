@@ -1,5 +1,5 @@
 document.getElementById('payform').addEventListener('submit', addOrder);
-let orderUrl = 'http://127.0.0.1:5000/api/v1/users/orders';
+let orderUrl = 'https://diana-fast-food-fast.herokuapp.com/api/v1/users/orders';
 token = localStorage.getItem('token')
 menu_id = localStorage.getItem('menu_id')
 

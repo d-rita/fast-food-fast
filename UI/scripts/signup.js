@@ -1,5 +1,5 @@
 document.getElementById('signup').addEventListener('submit', registerUser);
-let url = 'http://127.0.0.1:5000/api/v1/auth/signup';
+let url = 'https://diana-fast-food-fast.herokuapp.com/api/v1/auth/signup';
 
 function registerUser(e) {
     e.preventDefault();

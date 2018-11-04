@@ -1,4 +1,4 @@
-let url = 'http://127.0.0.1:5000/api/v1/menu';
+let url = 'https://diana-fast-food-fast.herokuapp.com/api/v1/menu';
 document.getElementById('add-food').addEventListener('submit', addFood);
 token = localStorage.getItem('token')
 
@@ -46,7 +46,7 @@ function addFood(e) {
 
 }
 
-let menuUrl = 'http://127.0.0.1:5000/api/v1/menu';
+let menuUrl = 'https://diana-fast-food-fast.herokuapp.com/api/v1/menu';
 document.getElementById('menus').addEventListener('load', getMenu());
 
 function getMenu() {
