@@ -1,4 +1,4 @@
-let url = 'http://127.0.0.1:5000/api/v1/orders';
+let url = 'https://diana-fast-food-fast.herokuapp.com/api/v1/orders';
 document.getElementById('order-list').addEventListener('load', getAllOrders());
 
 function getAllOrders() {
@@ -64,7 +64,7 @@ function getSingleOrder(order_id) {
     console.log(order_id)
 
 
-    let orderUrl = 'http://127.0.0.1:5000/api/v1/orders/' + order_id;
+    let orderUrl = 'https://diana-fast-food-fast.herokuapp.com/api/v1/orders/' + order_id;
     window.location.replace('update_order.html')
 
 

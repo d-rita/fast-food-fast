@@ -1,4 +1,4 @@
-let url = 'http://127.0.0.1:5000/api/v1/menu';
+let url = 'https://diana-fast-food-fast.herokuapp.com/api/v1/menu';
 document.getElementById('menu-items').addEventListener('load', getMenu());
 
 function getMenu() {
