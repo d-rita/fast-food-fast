@@ -1,0 +1,31 @@
+Endpoint to Add Food Item to Menu.
+---
+tags:
+    - Fast Food Menu
+parameters:
+    - name: token
+      in: header
+      description: A json web token generated for each loggged in user
+      required: true
+      type: string
+
+    - name: body
+      description: This contains details to add food to the menu.
+      in: body
+      required: true
+responses:
+  201:
+    description: Food successfully added to menu
+  400:
+    description: Food not added to the menu
+  401:
+    description: Unauthorised access
+
+security:
+  - JWT:
+      description: Pass in jwt token. i.e Bearer <jwt>
+      type: apiKey
+      scheme: bearer
+      name: token
+      in: header
+      bearerFormat: JWT

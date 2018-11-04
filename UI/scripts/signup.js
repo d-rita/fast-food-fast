@@ -1,5 +1,5 @@
 document.getElementById('signup').addEventListener('submit', registerUser);
-let url = 'https://diana-fast-food-fast.herokuapp.com/api/v1/auth/signup';
+let url = 'http://127.0.0.1:5000/api/v1/auth/signup';
 
 function registerUser(e) {
     e.preventDefault();
@@ -26,7 +26,7 @@ function registerUser(e) {
         .then(response => response.json())
         .then(res => {
             if (res.message === 'New user added') {
-                alert(`You can now sign in as ${User['username']}`);
+                alert(`You can now sign in as ${newUser['username']}`);
                 window.location.replace('user_login.html');
             } else {
                 alert(res.message)

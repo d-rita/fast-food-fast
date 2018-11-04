@@ -28,9 +28,30 @@ h1 a {
     flex-direction: row;
 }
 
+.admin {
+    background-color: #ffffcc;
+    display: flex;
+    flex-direction: column;
+}
+
 footer {
     color: grey;
     text-align: center;
+}
+
+.order-search {
+    display: flex;
+    flex-direction: row;
+}
+
+.search {
+    width: 50px;
+    font-size: 1.06em;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
 input[type=text],
@@ -81,7 +102,7 @@ legend {
 
 /*home.html*/
 
-.menu {
+#menu-items {
     margin: 0 auto;
 }
 
@@ -143,7 +164,7 @@ button {
 
 /*history.html*/
 
-.history {
+#history {
     margin: 0 auto;
 }
 
@@ -159,7 +180,7 @@ button {
     padding: 40px;
 }
 
-.orders {
+#menus {
     margin-left: 250px;
 }
 

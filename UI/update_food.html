@@ -19,7 +19,7 @@
         <div class="nav">
             <ul>
                 <li><a href="admin_dashboard.html">List of Orders</a></li>
-                <li><a href="update_food.html">Update Food Orders</a></li>
+                <li><a href="update_food.html">Update Menu</a></li>
                 <li><a href="user_login.html">Log Out</a></li>
             </ul>
         </div>
@@ -29,63 +29,14 @@
             <div class="food">
                 <form id="add-food">
                     <b>Add Available Food</b><br>
-                    <input type="text" placeholder="Enter Food Details">
-                    <input type="text" placeholder="Price">
+                    <input type="text" id="name" placeholder="Enter Food Details">
+                    <input type="text" id="price" placeholder="Price">
                     <input type="submit" value="Add food"> </form>
 
             </div>
             <!--endof food div-->
-            <div class="orders">
-                <table>
-                    <tr>
-                        <th><b>Food</b></th>
-                        <th><b>Price</b></th>
-                        <th colspan="2"><b>Action</b></th>
-                    </tr>
-                    <tr>
+            <div id="menus">
 
-                        <td>Veggie Burger</td>
-                        <td>12,000</td>
-                        <td><input type="button" value="Delete"></td>
-                        <td>
-                            <a href="edit.html"><input type="button" value="Edit"></a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>Chicken Burger</td>
-                        <td>12,000</td>
-                        <td><input type="button" value="Delete"></td>
-                        <td>
-                            <a href="edit.html"><input type="button" value="Edit"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Beef Burger</td>
-                        <td>12,000</td>
-                        <td><input type="button" value="Delete"></td>
-                        <td>
-                            <a href="edit.html"><input type="button" value="Edit"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Veggie Burger</td>
-                        <td>12,000</td>
-                        <td><input type="button" value="Delete"></td>
-                        <td>
-                            <a href="edit.html"><input type="button" value="Edit"></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Ham Burger</td>
-                        <td>12,000</td>
-                        <td><input type="button" value="Delete"></td>
-                        <td>
-                            <a href="edit.html"><input type="button" value="Edit"></a>
-                        </td>
-                    </tr>
-
-                </table>
             </div>
             <!--endof orders-->
 
@@ -94,6 +45,7 @@
         <!--endof main-->
     </div>
     <!--endof container-->
+    <script src="scripts/add_food.js"></script>
 
 </body>
 <footer>©Copyright of Fast-Food-Fast 2018. All rights reserved.</footer>

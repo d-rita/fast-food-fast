@@ -26,63 +26,26 @@
         </div>
         <!--endof nav-->
         <div class="main">
-            <div class="menu">
-                <table>
-                    <tr>
-                        <td>Chicken Burger</td>
-                        <td>12,000</td>
-                        <td><button id="order-btn">Add</button></td>
-                    </tr>
-                    <tr>
-                        <td>Chicken Burger</td>
-                        <td>12,000</td>
-                        <td><button id="order-btn">Add</button></td>
-                    </tr>
-                    <tr>
-                        <td>Beef Burger</td>
-                        <td>12,000</td>
-                        <td><button id="order-btn">Add</button></td>
-                    </tr>
-                    <tr>
-                        <td>Veggie Burger</td>
-                        <td>12,000</td>
-                        <td><button id="order-btn">Add</button></td>
-                    </tr>
-                    <tr>
-                        <td>Ham Burger</td>
-                        <td>12,000</td>
-                        <td><button id="order-btn">Add</button></td>
-                    </tr>
-                </table>
+            <div id="menu-items">
             </div>
             <!--endof menu-->
             <div class="checkout">
-                <table>
-                    <tr>
-                        <th colspan="2">My orders</th>
-                    </tr>
-                    <tr>
-                        <td>Veggie burger</td>
-                        <td>12,000</td>
-                    </tr>
-                    <tr>
-                        <td><b>Total Cost</b></td>
-                        <td><b>12,000</b></td>
-                    </tr>
-                </table>
                 <form id="payform">
-                    <input type="text" placeholder="Specify area of location">
-                    <input type="submit" value="Place my order">
-
+                    <fieldset>
+                        <legend>Fill in order details here</legend>
+                        <div id="food_id"></div>
+                        <input type="text" id="location" placeholder="Specify area of location">
+                        <input type="submit" value="Place my order">
+                    </fieldset>
                 </form>
             </div>
             <!--endof checkout-->
-
-
         </div>
         <!--endof main-->
     </div>
     <!--endof container-->
+    <script src="scripts/get_menu.js"></script>
+    <script src="scripts/place_order.js"></script>
 
 </body>
 <footer>©Copyright of Fast-Food-Fast 2018. All rights reserved.</footer>
